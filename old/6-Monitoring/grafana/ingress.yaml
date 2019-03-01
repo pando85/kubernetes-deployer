@@ -6,7 +6,7 @@ metadata:
   namespace: monitoring
 spec:
   rules:
-  - host: grafana.internal.carlosedp.com
+  - host: grafana.internal.kubernetes
     http:
       paths:
       - path: /

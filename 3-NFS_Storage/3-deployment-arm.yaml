@@ -23,9 +23,9 @@ spec:
             - name: PROVISIONER_NAME
               value: nfs-provisioner/nfs-ssd1
             - name: NFS_SERVER
-              value: 192.168.1.60
+              value: master-1.kubernetes
             - name: NFS_PATH
-              value: /data/kubernetes-storage
+              value: /storage
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
@@ -42,5 +42,5 @@ spec:
       volumes:
         - name: nfs-client-root
           nfs:
-            server: 192.168.1.60
-            path: /data/kubernetes-storage
+            server: master-1.kubernetes
+            path: /storage

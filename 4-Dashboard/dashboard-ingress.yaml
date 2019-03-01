@@ -7,10 +7,10 @@ metadata:
     traefik.frontend.rule.type: PathPrefix
 spec:
   rules:
-  - host: dashboard.internal.carlosedp.com
+  - host: dashboard.internal.kubernetes
     http:
       paths:
       - path: /
         backend:
           serviceName: kubernetes-dashboard
-          servicePort: 80
+          servicePort: 443
