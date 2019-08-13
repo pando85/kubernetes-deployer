@@ -16,6 +16,13 @@ Try: bionic-containers-rock64 image version (looks better)
 Pfsense configuration:
 - Connect to DMZ(192.168.1.0/24)
 - Add DHCP server: range(30-99)
+- Create lb for apiserver:
+  - assign static ip for k8s-1 and k8s-2
+  - create pool for 6443 and (k8s-1 and k8s-2) fixes ips as members
+  - create virtual server for 6443 at 192.168.1.10
+  - create DNS record kubernetes.grigri for 192.168.1.10
+- Create intermediate CA for kubernetes
+
 
 ## Setup Rock64
 
