@@ -21,7 +21,6 @@ Pfsense configuration:
   - create pool for 6443 and (k8s-1 and k8s-2) fixes ips as members
   - create virtual server for 6443 at 192.168.1.10
   - create DNS record kubernetes.grigri for 192.168.1.10
-- Create intermediate CA for kubernetes
 
 
 ## Setup Rock64
