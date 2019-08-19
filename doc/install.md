@@ -1,8 +1,9 @@
-- [Install](#install)
-  - [Flash SDs](#flash-sds)
-  - [Network](#network)
-  - [Setup Rock64](#setup-rock64)
-- [No overclocked yet](#no-overclocked-yet)
+- [Install](#Install)
+  - [Flash SDs](#Flash-SDs)
+  - [Network](#Network)
+  - [Setup Rock64](#Setup-Rock64)
+- [No overclocked yet](#No-overclocked-yet)
+  - [Kubernetes services](#Kubernetes-services)
 
 # Install
 
@@ -16,12 +17,7 @@ Try: bionic-containers-rock64 image version (looks better)
 Pfsense configuration:
 - Connect to DMZ(192.168.1.0/24)
 - Add DHCP server: range(30-99)
-- Create lb for apiserver:
-  - assign static ip for k8s-1 and k8s-2
-  - create pool for 6443 and (k8s-1 and k8s-2) fixes ips as members
-  - create virtual server for 6443 at 192.168.1.10
-  - create DNS record kubernetes.grigri for 192.168.1.10
-
+- Create lb for apiserver (used HaProxy) and dns entry
 
 ## Setup Rock64
 
@@ -63,3 +59,9 @@ Pfsense configuration:
   - update all packages
   - add ssh key
   - change rock64 password
+
+## Kubernetes services
+
+- Create image nodelocaldns (kubernetes dns repo)
+- Redeploy nodelocaldns daemon set
+- Use that dns for all nodes `/etc/resolv.conf`

@@ -1,0 +1,17 @@
+---
+
+- name: Configure vim as default editor
+  copy:
+    content: "export EDITOR=vi"
+    dest: /etc/profile.d/editor.sh
+
+- name: Allow sudo without password
+  replace:
+    path: /etc/sudoers
+    regexp: "^\%sudo"
+    replace: "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL"
+
+- name: Generate new machine-id
+  shell:
+  args:
+    creates: /etc/machine-id-new
