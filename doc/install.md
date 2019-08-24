@@ -1,15 +1,14 @@
-- [Install](#Install)
-  - [Flash SDs](#Flash-SDs)
-  - [Network](#Network)
-  - [Setup Rock64](#Setup-Rock64)
-- [No overclocked yet](#No-overclocked-yet)
-  - [Kubernetes services](#Kubernetes-services)
+- [Install](#install)
+  - [Flash SDs](#flash-sds)
+  - [Network](#network)
+  - [Setup Rock64](#setup-rock64)
+- [No overclocked yet](#no-overclocked-yet)
+  - [Kubernetes services](#kubernetes-services)
 
 # Install
 
 ## Flash SDs
-- Rock64: format all SDs with [last stretch image](https://github.com/ayufan-rock64/linux-build/releases)
-Try: bionic-containers-rock64 image version (looks better)
+- Rock64: format all SDs with [last bionic-containers-rock64 image](https://github.com/ayufan-rock64/linux-build/releases)
 - Replace `/etc/hostname` and `/etc/hosts` using new hostname
 
 ## Network
@@ -21,6 +20,7 @@ Pfsense configuration:
 
 ## Setup Rock64
 
+Connect to rock64 (rock64/rock64):
 - create `/etc/profile.d/editor.sh` `export EDITOR=vi`
 - visudo and replace `%sudo` line with `%sudo   ALL=(ALL:ALL) NOPASSWD:ALL`
 - generate random `/etc/machine-id` ( `rm /etc/machine-id && systemd-machine-id-setup`)

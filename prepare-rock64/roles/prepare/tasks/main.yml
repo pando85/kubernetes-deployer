@@ -12,6 +12,6 @@
     replace: "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL"
 
 - name: Generate new machine-id
-  shell:
+  shell: rm /etc/machine-id && systemd-machine-id-setup && touch /etc/machine-id-new
   args:
     creates: /etc/machine-id-new
