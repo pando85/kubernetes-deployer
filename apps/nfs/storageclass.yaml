@@ -1,9 +1,9 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: nfs-ssd1
+  name: grigri-dataset
   annotations:
     storageclass.kubernetes.io/is-default-class: true
-provisioner: nfs-provisioner/nfs-ssd1
+provisioner: nfs-provisioner/nfs-grigri-datasets
 parameters:
-  archiveOnDelete: "true"
+  archiveOnDelete: "false"

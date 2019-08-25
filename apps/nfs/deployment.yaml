@@ -4,9 +4,9 @@ metadata:
   name: nfs-client-provisioner
   namespace: nfs-storage
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
-    type: RollingUpdate
+    type: Recreate
   template:
     metadata:
       labels:
@@ -21,26 +21,13 @@ spec:
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              value: nfs-provisioner/nfs-ssd1
+              value: nfs-provisioner/nfs-grigri-datasets
             - name: NFS_SERVER
-              value: master-1.kubernetes
+              value: grigri.grigri
             - name: NFS_PATH
-              value: /storage
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - nfs-client-provisioner
-              topologyKey: kubernetes.io/hostname
-
+              value: /datasets/kubernetes
       volumes:
         - name: nfs-client-root
           nfs:
-            server: master-1.kubernetes
-            path: /storage
+            server: grigri.grigri
+            path: /datasets/kubernetes

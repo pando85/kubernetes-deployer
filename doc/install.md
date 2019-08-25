@@ -3,7 +3,6 @@
   - [Network](#network)
   - [Setup Rock64](#setup-rock64)
 - [No overclocked yet](#no-overclocked-yet)
-  - [DNS](#dns)
 
 # Install
 
@@ -59,17 +58,3 @@ Connect to rock64 (rock64/rock64):
   - update all packages
   - add ssh key
   - change rock64 password
-
-## DNS
-
-- nodelocaldns image >= 1.15.5
-- systemd-resolved configuration `/etc/systemd/resolved.conf`:
-  ```conf
-  [Resolve]
-  DNS=169.254.25.10
-  #FallbackDNS=
-  Domains=default.svc.kubernetes.grigri svc.kubernetes.grigri kubernetes.grigri grigri
-  ```
-
-
-
