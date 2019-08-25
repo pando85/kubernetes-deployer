@@ -3,7 +3,7 @@
   - [Network](#network)
   - [Setup Rock64](#setup-rock64)
 - [No overclocked yet](#no-overclocked-yet)
-  - [Kubernetes services](#kubernetes-services)
+  - [DNS](#dns)
 
 # Install
 
@@ -60,8 +60,16 @@ Connect to rock64 (rock64/rock64):
   - add ssh key
   - change rock64 password
 
-## Kubernetes services
+## DNS
 
-- Create image nodelocaldns (kubernetes dns repo)
-- Redeploy nodelocaldns daemon set
-- Use that dns for all nodes `/etc/resolv.conf`
+- nodelocaldns image >= 1.15.5
+- systemd-resolved configuration `/etc/systemd/resolved.conf`:
+  ```conf
+  [Resolve]
+  DNS=169.254.25.10
+  #FallbackDNS=
+  Domains=default.svc.kubernetes.grigri svc.kubernetes.grigri kubernetes.grigri grigri
+  ```
+
+
+
