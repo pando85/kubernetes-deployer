@@ -36,7 +36,7 @@ spec:
         - 169.254.25.10
         - -conf
         - /etc/coredns/Corefile
-        image: k8s.gcr.io/k8s-dns-node-cache:1.15.4-2
+        image: k8s.gcr.io/k8s-dns-node-cache:1.15.5
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 10
