@@ -6,10 +6,10 @@
     dest: /etc/profile.d/editor.sh
 
 - name: Allow sudo without password
-  replace:
+  lineinfile:
     path: /etc/sudoers
-    regexp: "^\%sudo"
-    replace: "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL"
+    regexp: "^%sudo"
+    line: "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL"
 
 - name: Generate new machine-id
   shell: rm /etc/machine-id && systemd-machine-id-setup && touch /etc/machine-id-new
