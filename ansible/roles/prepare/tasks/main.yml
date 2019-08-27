@@ -15,3 +15,34 @@
   shell: rm /etc/machine-id && systemd-machine-id-setup && touch /etc/machine-id-new
   args:
     creates: /etc/machine-id-new
+  register: first_execution
+
+- name: First execution
+  when: first_execution.changed
+  block:
+  - name: Change user password
+    user:
+      name: "{{ ansible_user }}"
+      password: "{{ prepare_password }}"
+      update_password: always
+
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+      force_apt_get: true
+
+- name: Set authorized keys
+  authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ item }}"
+  loop: "{{ prepare_public_keys }}"
+
+- name: Disable unused services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: stopped
+  loop: "{{ prepare_unused_services }}"
+

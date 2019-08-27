@@ -1,5 +1,7 @@
 ---
-
+# First execution:
+# ansible-playbook cluster.yml --ask-pass --ask-become-pass
 - import_playbook: prepare.yml
 
 - import_playbook: kubespray/cluster.yml
+  become: true
