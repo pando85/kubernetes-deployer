@@ -1,3 +1,6 @@
 [submodule "kubespray"]
 	path = kubespray
 	url = ssh://git@gitea.grigri.cloud:29518/agil/kubespray.git
+[submodule "apps/netdata/netdata"]
+	path = apps/netdata/netdata
+	url = https://github.com/netdata/helmchart.git

@@ -4,7 +4,6 @@
 
 Deployed to expose internal services.
 
-
 ### Deployment
 
 Deployment
@@ -35,4 +34,3 @@ metadata:
 ## Future
 
 In order to support suffix to create FQDNs Kubernetes is working on `IngressClaim`.
-
