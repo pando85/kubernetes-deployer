@@ -1,0 +1,8 @@
+---
+
+- name: Fix kubelet dns resolution config
+  replace:
+    path: /var/lib/kubelet/config.yaml
+    regexp: '10\.233\.0\.10'
+    replace: '169.254.25.10'
+  notify: restart kubelet

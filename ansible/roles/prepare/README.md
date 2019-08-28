@@ -1,38 +1,39 @@
-Role Name
-=========
+# Prepare
 
-A brief description of the role goes here.
+Role intended to setup rock64.
 
-Requirements
-------------
+## TODO
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+# No overclocked yet
+- [Add new overclock point](https://github.com/ayufan-rock64/linux-build/blob/master/recipes/overclocking.md):
+  ```bash
+  enable_dtoverlay 1398mhz cpu0-opp-table okay "opp-1392000000 {
+              opp-hz = /bits/ 64 <1392000000>;
+              opp-microvolt = <1350000>;
+              opp-microvolt-L0 = <1350000>;
+              opp-microvolt-L1 = <1325000>;
+              clock-latency-ns = <40000>;
+  }"
 
-Role Variables
---------------
+  # disable
+  # enable_dtoverlay 1398mhz cpu0-opp-table okay
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+  # next one (not added yet)
+  #enable_dtoverlay 1512mhz cpu0-opp-table okay "opp-1512000000 {
+  #            opp-hz = /bits/ 64 <1512000000>;
+  #            opp-microvolt = <1450000 1450000 1450000>;
+  #            opp-microvolt-L0 = <1450000 1450000 1450000>;
+  #            opp-microvolt-L1 = <1425000 1425000 1450000>;
+  #            clock-latency-ns = <40000>;
+  #}"
+  # Then, force to reload frequency table:
 
-Dependencies
-------------
+  echo cpufreq-dt > /sys/bus/platform/drivers/cpufreq-dt/unbind
+  echo cpufreq-dt > /sys/bus/platform/drivers/cpufreq-dt/bind
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+  # At very least verify that a new operating point is loaded:
 
-Example Playbook
-----------------
+  cat /sys/devices/system/cpu/cpufreq/policy0/scaling_available_frequencies
+  # 408000 600000 816000 1008000 1200000 1296000 1392000
+  ```
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).

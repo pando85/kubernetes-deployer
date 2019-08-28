@@ -1,0 +1,12 @@
+---
+- name: restart kubelet
+  systemd:
+    name: kubelet
+    state: restarted
+
+- name: restart docker
+  listen: "restart kubelet"
+  systemd:
+    name: docker
+    state: restarted
+

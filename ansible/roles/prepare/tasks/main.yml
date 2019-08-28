@@ -11,6 +11,13 @@
     regexp: "^%sudo"
     line: "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL"
 
+- name: Set authorized keys
+  authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ item }}"
+  loop: "{{ prepare_public_keys }}"
+
 - name: Generate new machine-id
   shell: rm /etc/machine-id && systemd-machine-id-setup && touch /etc/machine-id-new
   args:
@@ -31,13 +38,7 @@
       name: "*"
       state: latest
       force_apt_get: true
-
-- name: Set authorized keys
-  authorized_key:
-    user: "{{ ansible_user }}"
-    state: present
-    key: "{{ item }}"
-  loop: "{{ prepare_public_keys }}"
+      update_cache: true
 
 - name: Disable unused services
   systemd:
@@ -46,3 +47,9 @@
     state: stopped
   loop: "{{ prepare_unused_services }}"
 
+- name: Install nfs client
+  apt:
+    name: "nfs-common"
+    state: latest
+    force_apt_get: true
+    update_cache: true
