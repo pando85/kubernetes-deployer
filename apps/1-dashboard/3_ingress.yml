@@ -6,6 +6,7 @@ metadata:
   namespace: kube-system
   annotations:
     kubernetes.io/ingress.class: "nginx-internal"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   rules:
   - host: dashboard.k8s.grigri
