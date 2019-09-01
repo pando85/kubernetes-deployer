@@ -4,24 +4,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-ingress-controller-internal
-  namespace: ingress-nginx
+  namespace: nginx-ingress
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-    app: ingress-nginx-internal
+    app.kubernetes.io/name: nginx-ingress
+    app.kubernetes.io/part-of: nginx-ingress
+    app: nginx-ingress-internal
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ingress-nginx
-      app.kubernetes.io/part-of: ingress-nginx
-      app: ingress-nginx-internal
+      app.kubernetes.io/name: nginx-ingress
+      app.kubernetes.io/part-of: nginx-ingress
+      app: nginx-ingress-internal
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: ingress-nginx
-        app.kubernetes.io/part-of: ingress-nginx
-        app: ingress-nginx-internal
+        app.kubernetes.io/name: nginx-ingress
+        app.kubernetes.io/part-of: nginx-ingress
+        app: nginx-ingress-internal
       annotations:
         prometheus.io/port: "10254"
         prometheus.io/scrape: "true"
@@ -35,7 +35,7 @@ spec:
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
-            - --publish-service=$(POD_NAMESPACE)/ingress-nginx
+            - --publish-service=$(POD_NAMESPACE)/nginx-ingress
             - --ingress-class=nginx-internal
             - --annotations-prefix=nginx.ingress.kubernetes.io
           securityContext:
