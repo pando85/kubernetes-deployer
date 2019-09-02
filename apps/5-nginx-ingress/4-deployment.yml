@@ -37,6 +37,7 @@ spec:
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
             - --publish-service=$(POD_NAMESPACE)/nginx-ingress
             - --ingress-class=nginx-internal
+            - --enable-ssl-passthrough
             - --annotations-prefix=nginx.ingress.kubernetes.io
           securityContext:
             allowPrivilegeEscalation: true
