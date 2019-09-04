@@ -1,9 +1,13 @@
 ---
 
 - hosts: all
-  any_errors_fatal: true
   become: true
-  serial: 1
+  #serial: 1
   roles:
     - post-install
 
+- hosts: kube-master
+  any_errors_fatal: true
+  become: true
+  roles:
+    - encryption

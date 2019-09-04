@@ -6,3 +6,6 @@
     regexp: '10\.233\.0\.10'
     replace: '169.254.25.10'
   notify: restart kubelet
+  tags:
+    - post-install
+

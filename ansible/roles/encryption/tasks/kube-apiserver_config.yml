@@ -1,0 +1,37 @@
+---
+
+- name: Add encryption configuration
+  lineinfile:
+    path: "{{ kubeapi_config_path }}"
+    insertafter: '^\s*\- kube-apiserver'
+    line: "    - --encryption-provider-config={{ encryption_config_path }}"
+    validate: "python -c 'import yaml, sys; print(yaml.safe_load(sys.stdin))' < %s"
+    backup: true
+  register: config_backup
+
+- name: Add secrets volume mount
+  blockinfile:
+    path: "{{ kubeapi_config_path }}"
+    insertafter: '^\s*volumeMounts\:'
+    marker: '# {mark} SECRETS VOLUME MOUNT'
+    block: |2
+          - mountPath: {{ encryption_config_path | dirname }}
+            name: secrets
+            readOnly: true
+    validate: "python -c 'import yaml, sys; print(yaml.safe_load(sys.stdin))' < %s"
+
+- name: Add secrets volume
+  blockinfile:
+    path: "{{ kubeapi_config_path }}"
+    insertafter: '^\s*volumes\:'
+    marker: '# {mark} SECRETS VOLUME'
+    block: |2
+        - hostPath:
+            path: {{ encryption_config_path | dirname }}
+            type: DirectoryOrCreate
+          name: secrets
+    validate: "python -c 'import yaml, sys; print(yaml.safe_load(sys.stdin))' < %s"
+
+- name: Move original file backup to backup directory  # noqa 305
+  shell: mv {{ config_backup.backup }} {{ backup_dir }}/{{ config_backup.backup | basename }}
+  when: config_backup.backup

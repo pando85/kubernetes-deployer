@@ -1,0 +1,17 @@
+---
+- name: Create secrets directory
+  file:
+    state: directory
+    path: "{{ encryption_config_path | dirname }}"
+    mode: 0700
+    owner: root
+    group: root
+
+- name: Create encryption config
+  template:
+    src: encryption-config.yml.j2
+    dest: "{{ encryption_config_path }}"
+    mode: 0600
+    owner: root
+    group: root
+
