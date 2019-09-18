@@ -1,0 +1,49 @@
+---
+apiVersion: v1
+data: null
+kind: ConfigMap
+metadata:
+  name: config-artifact-bucket
+  namespace: tekton-pipelines
+---
+apiVersion: v1
+data:
+  image: thedoh/arm64-tektoncd-pipeline-cmd-entrypoint@sha256:59b1201290af2e0fd34299d512b6be96d623585e9be413a808bbfb83c6472e63
+kind: ConfigMap
+metadata:
+  name: config-entrypoint
+  namespace: tekton-pipelines
+---
+apiVersion: v1
+data:
+  loglevel.controller: info
+  loglevel.webhook: info
+  zap-logger-config: |
+    {
+      "level": "info",
+      "development": false,
+      "sampling": {
+        "initial": 100,
+        "thereafter": 100
+      },
+      "outputPaths": ["stdout"],
+      "errorOutputPaths": ["stderr"],
+      "encoding": "json",
+      "encoderConfig": {
+        "timeKey": "",
+        "levelKey": "level",
+        "nameKey": "logger",
+        "callerKey": "caller",
+        "messageKey": "msg",
+        "stacktraceKey": "stacktrace",
+        "lineEnding": "",
+        "levelEncoder": "",
+        "timeEncoder": "",
+        "durationEncoder": "",
+        "callerEncoder": ""
+      }
+    }
+kind: ConfigMap
+metadata:
+  name: config-logging
+  namespace: tekton-pipelines

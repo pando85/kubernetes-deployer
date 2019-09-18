@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: tekton-pipelines-controller
+  namespace: tekton-pipelines
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tekton-pipelines-controller
+    spec:
+      containers:
+      - args:
+        - -logtostderr
+        - -stderrthreshold
+        - INFO
+        - -kubeconfig-writer-image
+        - thedoh/arm64-tektoncd-pipeline-cmd-kubeconfigwriter@sha256:dfb10be1917d7e8c6a4d2eaa0ffc483586cd35524c6e8125dc6975737f19e997
+        - -creds-image
+        - thedoh/arm64-tektoncd-pipeline-cmd-creds-init@sha256:ca5b0dbfefb2dd8bbe6b91de6101ecb4c054d864896c0d5c556d78953336d619
+        - -git-image
+        - thedoh/arm64-tektoncd-pipeline-cmd-git-init@sha256:e38cb46dd8cfae142ef45c1e5bf4a6ceff8f059b2afa2e7405dd3d811311c17c
+        - -nop-image
+        - thedoh/arm64-tektoncd-pipeline-cmd-nop@sha256:09b013f1e3f9f3c8fa64c8befa3a7bd71ead9f8822ac1c32b2f1ef1338bbd78f
+        - -bash-noop-image
+        - thedoh/arm64-tektoncd-pipeline-cmd-bash@sha256:b98a74da79c847a600d4d98a47abc4ea8407b1826276600b403846e2ab43a29e
+        - -gsutil-image
+        - thedoh/arm64-tektoncd-pipeline-cmd-gsutil@sha256:b1b69e4dc0d066fff501bbc7b76abf48b9071fa0debc386605fe890f3539482c
+        image: thedoh/arm64-tektoncd-pipeline-cmd-controller@sha256:c33c6f418a764ad770bd4e5f66f4680cf9e8d04c4eec05fb8780d5f21600d77c
+        name: tekton-pipelines-controller
+        volumeMounts:
+        - mountPath: /etc/config-logging
+          name: config-logging
+      serviceAccountName: tekton-pipelines-controller
+      volumes:
+      - configMap:
+          name: config-logging
+        name: config-logging
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: tekton-pipelines-webhook
+  namespace: tekton-pipelines
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tekton-pipelines-webhook
+    spec:
+      containers:
+      - image: thedoh/arm64-tektoncd-pipeline-cmd-webhook@sha256:c9bd46e468c37195d3688a89ebd63cae8434bd537a08ab5248812cf746a4e8a0
+        name: webhook
+        volumeMounts:
+        - mountPath: /etc/config-logging
+          name: config-logging
+      serviceAccountName: tekton-pipelines-controller
+      volumes:
+      - configMap:
+          name: config-logging
+        name: config-logging
