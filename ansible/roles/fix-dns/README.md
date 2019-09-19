@@ -1,4 +1,4 @@
-# Post-install
+# fix-dns
 
 Fix kubelet DNS.
 

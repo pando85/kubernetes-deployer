@@ -4,7 +4,7 @@
   become: true
   #serial: 1
   roles:
-    - post-install
+    - fix-dns
 
 - hosts: kube-master
   any_errors_fatal: true

@@ -2,6 +2,7 @@
   - [Flash SDs](#flash-sds)
   - [Network](#network)
   - [Setup Rock64](#setup-rock64)
+  - [Cluster](#cluster)
 
 # Install
 
@@ -18,4 +19,10 @@ Pfsense configuration:
 
 ## Setup Rock64
 
-Use rol `prepare` to setup rock64.
+Use playbook `playbooks/install/prepare.yml` to setup rock64.
+
+## Cluster
+
+`playbooks/install/cluster.yml` to setup kubernetes
+
+And after that run `playbooks/install/post-install.yml`.
