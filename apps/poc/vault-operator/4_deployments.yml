@@ -1,0 +1,86 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: etcd-operator
+  namespace: vault
+  labels:
+    name: etcd-operator
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: etcd-operator
+    spec:
+      containers:
+      - name: etcd-operator
+        image: pando85/etcd-operator:v0.9.4
+        command:
+        - etcd-operator
+        - "--create-crd=false"
+        env:
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      - name: etcd-backup-operator
+        image: pando85/etcd-operator:v0.9.4
+        command:
+        - etcd-backup-operator
+        - "--create-crd=false"
+        env:
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      - name: etcd-restore-operator
+        image: pando85/etcd-operator:v0.9.4
+        command:
+        - etcd-restore-operator
+        - "--create-crd=false"
+        env:
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      serviceAccountName: etcd-controller
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vault-operator
+  namespace: vault
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: vault-operator
+    spec:
+      containers:
+      - name: vault-operator
+        image: pando85/vault-operator:0.1.9
+        env:
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      serviceAccountName: vault-controller
