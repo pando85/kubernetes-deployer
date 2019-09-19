@@ -43,7 +43,7 @@
 - name: Disable unused services
   systemd:
     name: "{{ item }}"
-    enabled: yes
+    enabled: false
     state: stopped
   loop: "{{ prepare_unused_services }}"
 
@@ -53,3 +53,8 @@
     state: latest
     force_apt_get: true
     update_cache: true
+
+- name: Remove unused cron
+  file:
+    state: absent
+    path: /etc/cron.d/make_nas_processes_faster
