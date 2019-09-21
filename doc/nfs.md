@@ -15,4 +15,14 @@ Install nfs-common in all machines: `ansible -i inventory/rock64-cluster/invento
 
 Using [kubernetes doc](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client)
 
-Create `../apps/nfs` files and apply.
+Create `../apps/3-nfs` files and apply.
+
+### Change default storage class
+
+Using [kubernetes doc](https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class)
+
+Set to false previous default storage class and then set to true your desired class:
+
+```bash
+kubectl patch storageclass <your-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
