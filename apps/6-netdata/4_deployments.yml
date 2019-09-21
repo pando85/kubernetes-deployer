@@ -139,7 +139,6 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: grigri-dataset
       resources:
         requests:
           storage: 2Gi
@@ -148,7 +147,6 @@ spec:
     spec:
       accessModes:
       - ReadWriteOnce
-      storageClassName: grigri-dataset
       resources:
         requests:
           storage: 100Mi
