@@ -35,7 +35,7 @@ data:
       [stream]
         enabled = yes
         destination = netdata:19999
-        api key = 6e5a5564-8ff0-4bc5-8943-33f52803d2ee
+        api key = __NETDATA_API_KEY__
         timeout seconds = 60
         buffer size bytes = 1048576
         reconnect delay seconds = 5
@@ -53,7 +53,7 @@ metadata:
 data:
   health:     |
       SEND_TELEGRAM="YES"
-      TELEGRAM_BOT_TOKEN="614277043:AAFMv2nVIJL3zUBWFreiIs1TWjBkJ6NvI3o"
+      TELEGRAM_BOT_TOKEN="__TELEGRAM_BOT_TOKEN__"
       DEFAULT_RECIPIENT_TELEGRAM="7055881"
 
   netdata:     |
@@ -75,7 +75,7 @@ data:
         diskspace = no
 
   stream:     |
-      [6e5a5564-8ff0-4bc5-8943-33f52803d2ee]
+      [__NETDATA_API_KEY__]
         enabled = yes
         history = 86400
         default memory mode = save
