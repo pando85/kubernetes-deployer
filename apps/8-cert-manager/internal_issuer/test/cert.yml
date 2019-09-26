@@ -1,0 +1,13 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: example-k8s
+  namespace: default
+spec:
+  secretName: example-k8s-tls
+  issuerRef:
+    name: internal
+    kind: ClusterIssuer
+  commonName: example.k8s.grigri
+  dnsNames:
+  - www.example.k8s.grigri
