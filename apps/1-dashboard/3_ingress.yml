@@ -7,9 +7,14 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx-internal"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    certmanager.k8s.io/cluster-issuer: "internal"
 spec:
+  tls:
+  - hosts:
+    - dashboard.k8s.grigri
+    secretName: dashboard-tls
   rules:
   - host: dashboard.k8s.grigri
     http:
