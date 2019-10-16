@@ -162,7 +162,7 @@ spec:
         release: release-name
         role: master
       annotations:
-        checksum/config: 8d9c029c0b308d3001781ac0fd48c002b42dc82fb220900e5feb47a04acbd035
+        checksum/config: 4135c3e8f9e2c4f608f2ace154a10e1bda62de005b080e14e131142d07f08668
     spec:
       securityContext:
         fsGroup: 201
