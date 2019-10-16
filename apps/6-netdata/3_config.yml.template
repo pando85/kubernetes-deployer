@@ -77,7 +77,7 @@ data:
   stream:     |
       [__NETDATA_API_KEY__]
         enabled = yes
-        history = 86400
+        default history = 86400
         default memory mode = save
         health enabled by default = auto
         allow from = *

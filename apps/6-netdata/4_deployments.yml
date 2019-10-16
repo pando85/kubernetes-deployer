@@ -17,7 +17,7 @@ spec:
     metadata:
       annotations:
         container.apparmor.security.beta.kubernetes.io/netdata: unconfined
-        checksum/config: 0e39217be1ccaf70c662137f3fbd8a6f03e6bcc8cab105e67e5e3db6bc857459
+        checksum/config: 1d4a1133d94be580573a45480ac09860e67ad49136bab9c79b4d45ec7abc41b9
       labels:
         app: netdata
         release: release-name
@@ -162,7 +162,7 @@ spec:
         release: release-name
         role: master
       annotations:
-        checksum/config: bd858509c0d3dc092aba2ec043e23668b43e460386a9417f27da08a528524be7
+        checksum/config: 8d9c029c0b308d3001781ac0fd48c002b42dc82fb220900e5feb47a04acbd035
     spec:
       securityContext:
         fsGroup: 201
