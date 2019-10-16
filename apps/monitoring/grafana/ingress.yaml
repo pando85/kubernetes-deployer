@@ -1,0 +1,22 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: nginx-internal
+    certmanager.k8s.io/cluster-issuer: "internal"
+spec:
+  tls:
+  - hosts:
+    - grafana.k8s.grigri
+    secretName: grafana-tls
+  rules:
+  - host: grafana.k8s.grigri
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: webui
