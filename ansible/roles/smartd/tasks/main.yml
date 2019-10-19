@@ -1,0 +1,30 @@
+---
+
+- name: install smartmontools
+  apt:
+    name: smartmontools
+    state: latest
+
+- name: configure smartd
+  lineinfile:
+    path: /etc/smartd.conf
+    regexp: '^/dev/sda '
+    line: '/dev/sda -a -d sat -o on -S on -s (S/../.././02|L/../../6/03)'
+  notify: restart smartd
+
+- name: create log dir
+  file:
+    path: /var/log/smartd
+    state: directory
+  tags:
+    - smartd
+
+- name: configure smartd daemon
+  lineinfile:
+    path: /etc/default/smartmontools
+    regexp: '^smartd_opts='
+    line: 'smartd_opts="-i 3600 -A /var/log/smartd/"'
+  notify: restart smartd
+  tags:
+    - smartd
+

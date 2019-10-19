@@ -1,0 +1,7 @@
+---
+
+- hosts: ceph
+  become: true
+  roles:
+    - smartd
+
