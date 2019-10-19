@@ -25,6 +25,10 @@ data:
       jobs:
         - url: http://127.0.0.1:10249/metrics
 
+  smartd:     |
+      local:
+        log_path: '/host/var/log/smartd'
+
   netdata:     |
       [global]
         memory mode = none

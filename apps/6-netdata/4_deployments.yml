@@ -17,7 +17,7 @@ spec:
     metadata:
       annotations:
         container.apparmor.security.beta.kubernetes.io/netdata: unconfined
-        checksum/config: 1d4a1133d94be580573a45480ac09860e67ad49136bab9c79b4d45ec7abc41b9
+        checksum/config: 0f7f49d4d579131ff25fe271ef8c64ee00cf60026d38160acffb9c088997ed13
       labels:
         app: netdata
         release: release-name
@@ -31,7 +31,7 @@ spec:
       initContainers: null
       containers:
       - name: netdata
-        image: netdata/netdata:v1.18.0
+        image: netdata/netdata:v1.18.1
         imagePullPolicy: Always
         env:
         - name: MY_POD_NAME
@@ -79,9 +79,13 @@ spec:
         - name: proc
           readOnly: true
           mountPath: /host/proc
+        - name: log
+          readOnly: true
+          mountPath: /host/var/log/
         - name: run
           mountPath: /var/run/docker.sock
         - name: sys
+          readOnly: true
           mountPath: /host/sys
         - name: config
           mountPath: /etc/netdata/go.d/coredns.conf
@@ -98,6 +102,9 @@ spec:
         - name: config
           mountPath: /etc/netdata/stream.conf
           subPath: stream
+        - name: config
+          mountPath: /etc/netdata/python.d/smartd_log.conf
+          subPath: smartd
         securityContext:
           capabilities:
             add:
@@ -111,6 +118,9 @@ spec:
       - name: proc
         hostPath:
           path: /proc
+      - name: log
+        hostPath:
+          path: /var/log
       - name: run
         hostPath:
           path: /var/run/docker.sock
