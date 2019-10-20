@@ -60,6 +60,16 @@ data:
       TELEGRAM_BOT_TOKEN="__TELEGRAM_BOT_TOKEN__"
       DEFAULT_RECIPIENT_TELEGRAM="7055881"
 
+  disk_temperature:     |
+      alarm: disks_temperature
+      on: smartd_log_local.temperature_celsius
+      lookup: average -1s foreach *
+      units: celsius
+      every: 1m
+      warn: $this > 38
+      crit: $this > 40
+      info: disk temperature
+
   netdata:     |
       [global]
         memory mode = dbengine

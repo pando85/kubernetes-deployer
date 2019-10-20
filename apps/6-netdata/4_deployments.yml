@@ -17,7 +17,7 @@ spec:
     metadata:
       annotations:
         container.apparmor.security.beta.kubernetes.io/netdata: unconfined
-        checksum/config: 0f7f49d4d579131ff25fe271ef8c64ee00cf60026d38160acffb9c088997ed13
+        checksum/config: 083c889834e7ebd3126fcf1c7f40c958d4506ed6542854ae2be6f7809e127cb5
       labels:
         app: netdata
         release: release-name
@@ -172,7 +172,7 @@ spec:
         release: release-name
         role: master
       annotations:
-        checksum/config: 4135c3e8f9e2c4f608f2ace154a10e1bda62de005b080e14e131142d07f08668
+        checksum/config: a5852f25875b42fafc4d8ca18fa7c31fb4b3c7f95448c0af0e9f880427a36855
     spec:
       securityContext:
         fsGroup: 201
@@ -180,7 +180,7 @@ spec:
       initContainers: null
       containers:
       - name: netdata
-        image: netdata/netdata:v1.18.0
+        image: netdata/netdata:v1.18.1
         imagePullPolicy: Always
         env:
         - name: MY_POD_NAME
@@ -222,6 +222,9 @@ spec:
         - name: config
           mountPath: /etc/netdata/health_alarm_notify.conf
           subPath: health
+        - name: config
+          mountPath: /etc/netdata/health.d/disk_temperature.conf
+          subPath: disk_temperature
         - name: config
           mountPath: /etc/netdata/netdata.conf
           subPath: netdata
