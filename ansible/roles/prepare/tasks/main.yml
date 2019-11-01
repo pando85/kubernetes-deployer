@@ -24,6 +24,21 @@
     creates: /etc/machine-id-new
   register: first_execution
 
+- name: Remove conflict systemd services
+  file:
+    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+    state: absent
+
+- name: Remove conflict packages
+  apt:
+    name:
+      - kubelet
+      - kubeadm
+      - kubectl
+      - cri-tools
+      - kubernetes-cni
+    state: absent
+
 - name: First execution
   when: first_execution.changed
   block:
