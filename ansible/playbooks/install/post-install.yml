@@ -2,12 +2,13 @@
 
 - hosts: all
   become: true
-  #serial: 1
+  serial: 1
   roles:
     - fix-dns
 
 - hosts: kube-master
   any_errors_fatal: true
   become: true
+  serial: 1
   roles:
     - encryption
