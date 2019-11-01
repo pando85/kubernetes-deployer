@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: alertmanager
-        image: napnap75/rpi-prometheus:alertmanager
+        image: carlosedp/alertmanager:v0.16.2
         args:
           - '--config.file=/etc/alertmanager/config.yml'
           - '--storage.path=/alertmanager'
