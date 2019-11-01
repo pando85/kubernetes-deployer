@@ -14,11 +14,14 @@ spec:
       labels:
         app: prometheus
         component: core
+      annotations:
+        checksum/config-core: 3fa76edddc673ff0acfa361302e9aacb7a7e3a331c114706ec93695ee484fabc
+        checksum/config-rules: 85e17bc51ae6c6a4c16492acef796fc5e3d6ee30dd52401f7561c28306fcca5d
     spec:
       serviceAccountName: prometheus-k8s
       containers:
       - name: prometheus
-        image: rycus86/prometheus:2.7.1
+        image: prom/prometheus:v2.13.1
         args:
           - '--storage.tsdb.retention=10d'
           - '--config.file=/etc/prometheus/prometheus.yaml'

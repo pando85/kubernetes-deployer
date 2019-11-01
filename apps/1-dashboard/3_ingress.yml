@@ -10,6 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-passthrough: "false"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     certmanager.k8s.io/cluster-issuer: "internal"
+    prometheus.io/probe: "true"
 spec:
   tls:
   - hosts:

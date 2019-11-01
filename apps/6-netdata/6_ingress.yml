@@ -12,6 +12,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx-internal
     certmanager.k8s.io/cluster-issuer: "internal"
+    prometheus.io/probe: "true"
 spec:
   tls:
   - hosts:

@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: blackbox-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: blackbox-exporter
+      labels:
+        app: blackbox-exporter
+    spec:
+      containers:
+      - name: blackbox-exporter
+        image: carlosedp/blackbox_exporter:v0.14.0
+        ports:
+        - name: http
+          containerPort: 9115
+
