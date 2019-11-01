@@ -15,15 +15,15 @@ spec:
         app: prometheus
         component: core
       annotations:
-        checksum/config-core: 3fa76edddc673ff0acfa361302e9aacb7a7e3a331c114706ec93695ee484fabc
-        checksum/config-rules: 85e17bc51ae6c6a4c16492acef796fc5e3d6ee30dd52401f7561c28306fcca5d
+        checksum/config-core: bbadce86cd4cd749069810b42ebb7b37b858de8b6796ab1a8d663485a0d102cd
+        checksum/config-rules: aa62f90f53182b932104e1d128c22f8433cec01a0e41a694d8bb4bc747a13331
     spec:
       serviceAccountName: prometheus-k8s
       containers:
       - name: prometheus
         image: prom/prometheus:v2.13.1
         args:
-          - '--storage.tsdb.retention=10d'
+          - '--storage.tsdb.retention.time=10d'
           - '--config.file=/etc/prometheus/prometheus.yaml'
         ports:
         - name: webui

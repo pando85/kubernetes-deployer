@@ -11,10 +11,7 @@ data:
       scrape_timeout: 10s
       evaluation_interval: 10s
     rule_files:
-      - "cpu-usage.rules"
-      - "instance-availability.rules"
-      - "low-disk-space.rules"
-      - "mem-usage.rules"
+      - "/etc/prometheus-rules/k8s.rules.yml"
     alerting:
       alertmanagers:
       - static_configs:
