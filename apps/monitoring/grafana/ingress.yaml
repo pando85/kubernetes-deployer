@@ -20,4 +20,4 @@ spec:
       - path: /
         backend:
           serviceName: grafana
-          servicePort: webui
+          servicePort: http
