@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: blackbox-exporter
-        image: carlosedp/blackbox_exporter:v0.14.0
+        image: prom/blackbox-exporter:v0.15.1
         ports:
         - name: http
           containerPort: 9115
