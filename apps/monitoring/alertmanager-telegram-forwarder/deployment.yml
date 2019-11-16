@@ -1,0 +1,27 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: alertmanager-telegram-forwarder
+  namespace: monitoring
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: alertmanager-telegram-forwarder
+      labels:
+        app: alertmanager-telegram-forwarder
+    spec:
+      containers:
+      - name: alertmanager-telegram-forwarder
+        image: pando85/alertmanager-telegram-forwarder:latest
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+          - name: TELEGRAM_BOT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: telegram-bot
+                key: token
+
