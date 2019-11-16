@@ -110,7 +110,13 @@ spec:
             add:
             - SYS_PTRACE
             - SYS_ADMIN
-        resources: {}
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256M
+          requests:
+            cpu: 150m
+            memory: 64M
       tolerations:
       - effect: NoSchedule
         operator: Exists
@@ -235,7 +241,13 @@ spec:
           mountPath: /var/cache/netdata
         - name: alarms
           mountPath: /var/lib/netdata
-        resources: {}
+        resources:
+          limits:
+            cpu: 300m
+            memory: 1.5G
+          requests:
+            cpu: 150m
+            memory: 500M
       volumes:
       - name: config
         configMap:
