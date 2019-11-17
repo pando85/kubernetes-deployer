@@ -5,7 +5,7 @@ metadata:
   name: alertmanager-telegram-forwarder
   namespace: monitoring
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       name: alertmanager-telegram-forwarder
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: alertmanager-telegram-forwarder
-        image: pando85/alertmanager-telegram-forwarder:latest
+        image: pando85/alertmanager-telegram-forwarder:0.2.0
         ports:
         - name: http
           containerPort: 8080
@@ -24,4 +24,10 @@ spec:
               secretKeyRef:
                 name: telegram-bot
                 key: token
-
+        resources:
+          limits:
+            cpu: 200m
+            memory: 128M
+          requests:
+            cpu: 100m
+            memory: 40M
