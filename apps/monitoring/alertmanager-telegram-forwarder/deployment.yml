@@ -11,10 +11,12 @@ spec:
       name: alertmanager-telegram-forwarder
       labels:
         app: alertmanager-telegram-forwarder
+      annotations:
+        checksum/config: af94dc1c0692cfc97699ffe90a5c4871586cd27c6ea3d9b4eef3a8cc0a5f2075
     spec:
       containers:
       - name: alertmanager-telegram-forwarder
-        image: pando85/alertmanager-telegram-forwarder:0.2.0
+        image: pando85/alertmanager-telegram-forwarder:0.3.0
         ports:
         - name: http
           containerPort: 8080
@@ -24,6 +26,8 @@ spec:
               secretKeyRef:
                 name: telegram-bot
                 key: token
+          - name: TEMPLATE_PATH
+            value: "/etc/forwarder/message.j2"
         resources:
           limits:
             cpu: 200m
@@ -41,3 +45,10 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /etc/forwarder
+          name: alertmanager-forwarder-template
+      volumes:
+      - name: alertmanager-forwarder-template
+        configMap:
+          name: alertmanager-forwarder-template
