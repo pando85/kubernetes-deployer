@@ -28,7 +28,6 @@ spec:
           name: https-main
         resources:
           limits:
-            cpu: 20m
             memory: 40Mi
           requests:
             cpu: 10m
@@ -45,7 +44,6 @@ spec:
           name: https-self
         resources:
           limits:
-            cpu: 20m
             memory: 40Mi
           requests:
             cpu: 10m
