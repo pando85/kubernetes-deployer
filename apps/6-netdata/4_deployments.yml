@@ -112,7 +112,6 @@ spec:
             - SYS_ADMIN
         resources:
           limits:
-            cpu: 300m
             memory: 256M
           requests:
             cpu: 150m
@@ -243,7 +242,6 @@ spec:
           mountPath: /var/lib/netdata
         resources:
           limits:
-            cpu: 300m
             memory: 1.5G
           requests:
             cpu: 150m
