@@ -30,7 +30,6 @@ spec:
             value: "/etc/forwarder/message.j2"
         resources:
           limits:
-            cpu: 200m
             memory: 128M
           requests:
             cpu: 100m
