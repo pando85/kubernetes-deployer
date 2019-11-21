@@ -50,6 +50,8 @@ spec:
     fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1000
+  secrets:
+    - etcd-client
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
