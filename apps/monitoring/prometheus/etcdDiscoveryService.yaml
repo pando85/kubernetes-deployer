@@ -10,11 +10,11 @@ metadata:
 subsets:
 - addresses:
   - ip: 192.168.1.21
-    nodeName: 192.168.1.21
+    nodeName: k8s-1
   - ip: 192.168.1.22
-    nodeName: 192.168.1.22
+    nodeName: k8s-2
   - ip: 192.168.1.23
-    nodeName: 192.168.1.23
+    nodeName: k8s-3
   ports:
   - name: http-metrics
     port: 2379
