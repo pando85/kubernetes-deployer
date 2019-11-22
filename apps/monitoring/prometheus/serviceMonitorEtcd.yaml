@@ -16,7 +16,7 @@ spec:
       certFile: /etc/prometheus/secrets/etcd-client/node-k8s-1.pem
       keyFile: /etc/prometheus/secrets/etcd-client/node-k8s-1-key.pem
       serverName: etcd.kube-system.svc.kubernetes.grigri
-  jobLabel: jobLabel
+  jobLabel: k8s-app
   namespaceSelector:
     matchNames:
     - kube-system
