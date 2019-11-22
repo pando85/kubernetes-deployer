@@ -12,7 +12,7 @@ spec:
       labels:
         app: alertmanager-telegram-forwarder
       annotations:
-        checksum/config: 5a96df1b5fd34fc91c95cc28bab921236bfff7ea6c94e46b3b3a4af6f175d0ba
+        checksum/config: 0da7c8d8a5a543e6d2fca3a764cfcd52ce3216546165687b662ebedd5ebd60e4
     spec:
       containers:
       - name: alertmanager-telegram-forwarder

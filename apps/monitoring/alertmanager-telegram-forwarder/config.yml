@@ -19,7 +19,9 @@ data:
      *{{ alert.labels.alertname }}*
     _{{ alert.annotations.message }}_
     [Prometheus]({{ alert.generatorURL }})
+    {% if 'runbook_url' in alert.annotations -%}
     [Runbook URL]({{ alert.annotations.runbook_url }})
+    {%- endif -%}
 kind: ConfigMap
 metadata:
   name: alertmanager-forwarder-template
