@@ -26,6 +26,7 @@ spec:
         - --logtostderr=true
         - --config-reloader-image=carlosedp/configmap-reload:v0.2.2
         - --prometheus-config-reloader=carlosedp/prometheus-config-reloader:v0.31.1
+        - --config-reloader-cpu=0
         image: carlosedp/prometheus-operator:v0.31.1
         name: prometheus-operator
         ports:
