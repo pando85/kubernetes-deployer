@@ -33,15 +33,15 @@ spec:
   additionalScrapeConfigs:
     name: blackbox-scrape
     key: blackbox.yaml
-  replicas: 1
+  replicas: 2
   resources:
     requests:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 1000m
+      memory: 1024Mi
     limits:
       cpu: 2000m
       memory: 2048Mi
-  retention: 90d
+  retention: 7d
   ruleSelector:
     matchLabels:
       prometheus: k8s
