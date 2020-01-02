@@ -1,7 +1,0 @@
----
-
-encryption_config_path: /etc/kubernetes/secrets/encryption.yml
-kubeapi_config_path: /etc/kubernetes/manifests/kube-apiserver.yaml
-backup_dir: /var/backups
-encryption_key: "{{ lookup('passwordstore', 'kubernetes.grigri/encryption_key create=true length=32') }}"
-

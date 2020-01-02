@@ -1,6 +1,4 @@
 ---
 
-- import_playbook: kubespray/upgrade-cluster.yml
-
-- import_playbook: playbooks/install/post-install.yml
+- import_playbook: ../../kubespray/upgrade-cluster.yml
 

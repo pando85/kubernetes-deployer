@@ -20,7 +20,7 @@ kube_users_dir: "{{ kube_config_dir }}/users"
 kube_api_anonymous_auth: true
 
 ## Change this to use another Kubernetes version, e.g. a current beta release
-kube_version: v1.15.5
+kube_version: v1.16.3
 
 # kubernetes image repo define
 kube_image_repo: "gcr.io/google-containers"
@@ -120,7 +120,8 @@ kube_proxy_nodeport_addresses: >-
 #   {%- endif -%}
 
 ## Encrypting Secret Data at Rest (experimental)
-kube_encrypt_secret_data: false
+kube_encrypt_secret_data: true
+kube_encrypt_token: "{{ lookup('passwordstore', 'kubernetes.grigri/encryption_key create=true length=32') }}"
 
 # DNS configuration.
 # Kubernetes cluster name, also will be used as DNS domain

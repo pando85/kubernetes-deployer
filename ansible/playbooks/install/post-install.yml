@@ -1,9 +1,0 @@
----
-
-- hosts: kube-master
-  any_errors_fatal: true
-  become: true
-  serial: 1
-  roles:
-    - encryption
-
