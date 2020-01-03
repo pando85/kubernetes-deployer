@@ -1,11 +1,14 @@
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tekton-pipelines-controller
   namespace: tekton-pipelines
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: tekton-pipelines-controller
   template:
     metadata:
       labels:
@@ -39,20 +42,23 @@ spec:
           name: config-logging
         name: config-logging
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tekton-pipelines-webhook
   namespace: tekton-pipelines
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: tekton-pipelines-webhook
   template:
     metadata:
       labels:
         app: tekton-pipelines-webhook
     spec:
       containers:
-      - image: thedoh/arm64-tektoncd-pipeline-cmd-webhook@sha256:c9bd46e468c37195d3688a89ebd63cae8434bd537a08ab5248812cf746a4e8a0
+      - image: thedoh/arm64-tektoncd-pipeline-cmd-webhook:8662e9bafc9c4c69d4e67546569f236f8c2962ff7190f48e2fc7295c3679fc8b
         name: webhook
         volumeMounts:
         - mountPath: /etc/config-logging
