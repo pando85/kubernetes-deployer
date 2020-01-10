@@ -73,3 +73,14 @@
   file:
     state: absent
     path: /etc/cron.d/make_nas_processes_faster
+
+- name: Add CA to CA trust
+  copy:
+    content: "{{ item.cert }}"
+    dest: "/usr/local/share/ca-certificates/{{ item.name }}.crt"
+  when:
+    - custom_cas is defined
+  loop: "{{ custom_cas }}"
+  tags:
+    - custom-cas
+  notify: update-ca-certificates
