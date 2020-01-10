@@ -1,5 +1,8 @@
 # see roles/network_plugin/calico/defaults/main.yml
 
+calico_policy_controller_cpu_limit: 600m
+calico_node_cpu_limit: 600m
+
 ## With calico it is possible to distributed routes with border routers of the datacenter.
 ## Warning : enabling router peering will disable calico's default behavior ('node mesh').
 ## The subnets of each nodes will be distributed by the datacenter router
