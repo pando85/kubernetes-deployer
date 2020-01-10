@@ -1,0 +1,17 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: release-name-docker-registry
+  namespace: registry
+  labels:
+    app: release-name-docker-registry
+    chart: "docker-registry-1.9.1"
+    release: "release-name"
+    heritage: "Tiller"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "50Gi"
