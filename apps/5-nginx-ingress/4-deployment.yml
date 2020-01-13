@@ -45,7 +45,7 @@ spec:
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
-            - --publish-service=$(POD_NAMESPACE)/nginx-ingress
+            - --publish-service=$(POD_NAMESPACE)/nginx-ingress-internal
             - --ingress-class=nginx-internal
             - --enable-ssl-passthrough
             - --annotations-prefix=nginx.ingress.kubernetes.io

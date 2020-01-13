@@ -27,5 +27,23 @@ BGP route table and route all network to that loadbalancer IPs. We use
       announce all
   	descr "k8s-2"
   }
+
+  neighbor 192.168.1.23 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-3"
+  }
+
+  neighbor 192.168.1.24 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-4"
+  }
+
+  neighbor 192.168.1.25 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-5"
+  }
   ```
 - and then setup metallb `cd apps/metallb && kubectl apply -f .`
