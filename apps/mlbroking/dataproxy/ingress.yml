@@ -1,0 +1,25 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dataproxy
+  namespace: mlbroking
+  labels:
+    app: dataproxy
+  annotations:
+      certmanager.k8s.io/cluster-issuer: "internal"
+      kubernetes.io/ingress.class: "nginx-internal"
+      prometheus.io/probe: "true"
+spec:
+  rules:
+    - host: dataproxy.k8s.grigri
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dataproxy-backend
+              servicePort: 8080
+  tls:
+    - hosts:
+      - dataproxy.k8s.grigri
+      secretName: registry-tls

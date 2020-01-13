@@ -1,0 +1,83 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dataproxy-backend
+  namespace: mlbroking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dataproxy
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: dataproxy
+        tier: backend
+    spec:
+      containers:
+        - name: dataproxy
+          image: registry.k8s.grigri/dataproxy:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: dataproxy-database
+                  key: database
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: dataproxy-database
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dataproxy-database
+                  key: password
+            - name: POSTGRES_HOST
+              value: dataproxy-database
+            - name: POSTGRES_PORT
+              value: "5432"
+            - name: IEX_API_VERSION
+              value: v1
+            - name: IEX_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: dataproxy-iex
+                  key: token
+          resources:
+            limits:
+              cpu: 600m
+              memory: 512M
+            requests:
+              cpu: 300m
+              memory: 128M
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /v1/ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /v1/ping
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          # Enable when python libs change from /root/.local/bin
+          #securityContext:
+          #  runAsNonRoot: true
+          #  runAsUser: 65534
