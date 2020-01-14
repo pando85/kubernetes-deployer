@@ -58,7 +58,7 @@ spec:
                 - -c
                 - -e
                 - exec pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} -h 127.0.0.1
-            initialDelaySeconds: 240
+            initialDelaySeconds: 600
             periodSeconds: 10
             timeoutSeconds: 5
             successThreshold: 1
