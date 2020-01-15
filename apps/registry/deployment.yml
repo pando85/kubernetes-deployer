@@ -15,7 +15,7 @@ spec:
     matchLabels:
       app: docker-registry
       release: release-name
-  replicas: 2
+  replicas: 1
   minReadySeconds: 5
   template:
     metadata:
