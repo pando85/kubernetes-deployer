@@ -16,10 +16,25 @@ spec:
         app: dataproxy
         tier: backend
     spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - dataproxy
+                - key: tier
+                  operator: In
+                  values:
+                  - database
       containers:
         - name: dataproxy
-          image: registry.k8s.grigri/dataproxy:latest
-          imagePullPolicy: Always
+          image: registry.k8s.grigri/dataproxy:1.0.0
           ports:
             - name: http
               containerPort: 8080
