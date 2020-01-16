@@ -1,0 +1,74 @@
+---
+# Source: docker-registry/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pypiserver
+  namespace: pypiserver
+  labels:
+    app: pypiserver
+spec:
+  selector:
+    matchLabels:
+      app: pypiserver
+  replicas: 2
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: pypiserver
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - pypiserver
+              topologyKey: "kubernetes.io/hostname"
+      securityContext:
+        fsGroup: 9898
+        runAsUser: 9898
+      containers:
+        - name: pypiserver
+          image: "registry.k8s.grigri/pypiserver:v1.3.2"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          command:
+            - pypi-server
+            - -p
+            - "8080"
+            - -P
+            - .
+            - -a
+            - .
+            - packages
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256M
+            requests:
+              cpu: 100m
+              memory: 128M
+          volumeMounts:
+            - name: data
+              mountPath: /data/packages
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pypiserver
