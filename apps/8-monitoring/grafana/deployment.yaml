@@ -107,6 +107,9 @@ spec:
         - mountPath: /grafana-dashboard-definitions/0/etcd
           name: grafana-dashboard-etcd
           readOnly: false
+        - mountPath: /grafana-dashboard-definitions/0/smartmon
+          name: grafana-dashboard-smartmon
+          readOnly: false
         - mountPath: /etc/grafana
           name: grafana-config
           readOnly: false
@@ -192,6 +195,9 @@ spec:
       - configMap:
           name: grafana-dashboard-etcd
         name: grafana-dashboard-etcd
+      - configMap:
+          name: grafana-dashboard-smartmon
+        name: grafana-dashboard-smartmon
       - name: grafana-config
         secret:
           secretName: grafana-config

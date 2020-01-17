@@ -1,7 +1,0 @@
----
-- name: restart smartd
-  systemd:
-    name: smartd
-    state: restarted
-
-
