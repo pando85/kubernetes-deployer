@@ -9,5 +9,6 @@ kubectl create secret generic -n mlbroking dataproxy-database \
     --from-literal=database=${DATABASE}
 
 IEX_TOKEN=$(pass kubernetes.grigri/mlbroking/dataproxy/iex_token | head -n 1)
+IEX_SECRET_KEY=$(pass kubernetes.grigri/mlbroking/dataproxy/iex_secret_key | head -n 1)
 kubectl create secret generic -n mlbroking dataproxy-iex \
-    --from-literal=token=${IEX_TOKEN}
+    --from-literal=token=${IEX_TOKEN} --from-literal=sk=${IEX_SECRET_KEY}

@@ -34,7 +34,7 @@ spec:
                   - database
       containers:
         - name: dataproxy
-          image: registry.k8s.grigri/dataproxy:1.0.0
+          image: registry.k8s.grigri/dataproxy:2f056758fa01f1862f8a93913ee00c0ab61a6eb8
           ports:
             - name: http
               containerPort: 8080
@@ -58,6 +58,8 @@ spec:
               value: dataproxy-database
             - name: POSTGRES_PORT
               value: "5432"
+            - name: LOG_LEVEL
+              value: INFO
             - name: IEX_API_VERSION
               value: v1
             - name: IEX_TOKEN
@@ -65,6 +67,11 @@ spec:
                 secretKeyRef:
                   name: dataproxy-iex
                   key: token
+            - name: IEX_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: dataproxy-iex
+                  key: sk
           resources:
             limits:
               cpu: 600m
