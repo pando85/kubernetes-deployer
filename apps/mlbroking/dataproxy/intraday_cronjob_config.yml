@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dataproxy-intraday
+  namespace: mlbroking
+data:
+  intraday.py: |-
+    #!/usr/bin/env python3
+    import requests
+
+    from datetime import datetime, timedelta
+
+
+    STOCKS = ['GOOGL', 'AMZN', 'AMD', 'MU', 'FB', 'INTC', 'NVDA', 'NXPI', 'QCOM', 'TSLA']
+
+
+    def get_intraday_data(company_stock_name: str, date: datetime):
+        response = requests.get(
+            f'https://dataproxy.k8s.grigri/v1/stock/{company_stock_name}/{date.strftime("%Y-%m-%d")}')
+        data_json = response.json()
+        print(f'date: {date}    status_code: {response.status_code} len_data: {len(data_json)}')
+        return data_json
+
+
+    if __name__ == '__main__':
+        day = datetime.today() - timedelta(days=1)
+        for stock in STOCKS:
+            print(f'Stock: {stock}')
+            get_intraday_data(stock, day)

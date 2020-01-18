@@ -1,0 +1,34 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dataproxy-intraday
+  namespace: mlbroking
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dataproxy-intraday-collect
+            image: python:3.7-slim-buster
+            command:
+            - /bin/sh
+            - -c
+            args:
+            - pip install requests; REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt python /usr/src/app/intraday.py
+            volumeMounts:
+            - mountPath: /usr/src/app
+              name: dataproxy-intraday
+              readOnly: false
+            - name: ca-trust
+              mountPath: /etc/ssl/certs/ca-certificates.crt
+          restartPolicy: OnFailure
+          volumes:
+          - configMap:
+              name: dataproxy-intraday
+            name: dataproxy-intraday
+          - name: ca-trust
+            hostPath:
+              path: /etc/ssl/certs/ca-certificates.crt
+              type: File
