@@ -97,3 +97,11 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
+          volumeMounts:
+            - mountPath: /dev/shm
+              name: dshm
+      volumes:
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 100Mi
