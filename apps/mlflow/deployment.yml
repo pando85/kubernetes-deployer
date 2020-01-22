@@ -1,0 +1,61 @@
+---
+# Source: docker-mlflow/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow
+  namespace: mlflow
+  labels:
+    app: mlflow
+spec:
+  selector:
+    matchLabels:
+      app: mlflow
+  replicas: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: mlflow
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: mlflow
+          image: "pando85/mlflow"
+          command:
+          - mlflow
+          - server
+          - --host
+          - 0.0.0.0
+          - --workers
+          - 1
+          - --backend-store-uri
+          - /var/lib/mlflow
+          - --expose-prometheus
+          - /tmp/test
+          ports:
+            - containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          resources:
+            limits:
+              cpu: 400m
+              memory: 256M
+            requests:
+              cpu: 100m
+              memory: 128M
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mlflow
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: mlflow
