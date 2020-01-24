@@ -10,10 +10,10 @@ metadata:
     release: release-name
     heritage: Tiller
   annotations:
-      certmanager.k8s.io/cluster-issuer: "internal"
-      kubernetes.io/ingress.class: "nginx-internal"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      prometheus.io/probe: "true"
+    certmanager.k8s.io/cluster-issuer: "internal"
+    kubernetes.io/ingress.class: "nginx-internal"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    prometheus.io/probe: "true"
 spec:
   rules:
     - host: registry.k8s.grigri
