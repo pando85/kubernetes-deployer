@@ -29,14 +29,17 @@ spec:
           - --host
           - "0.0.0.0"
           - --workers
-          - "1"
+          - "3"
           - --backend-store-uri
-          - /var/lib/mlflow
+          - /var/lib/mlflow/
           - --expose-prometheus
           - /dev/shm
+          - --gunicorn-opts
+          - --timeout 60
           ports:
             - containerPort: 5000
           livenessProbe:
+            initialDelaySeconds: 200
             httpGet:
               path: /
               port: 5000
@@ -46,11 +49,11 @@ spec:
               port: 5000
           resources:
             limits:
+              cpu: 1
+              memory: 512M
+            requests:
               cpu: 400m
               memory: 256M
-            requests:
-              cpu: 100m
-              memory: 128M
           volumeMounts:
             - name: data
               mountPath: /var/lib/mlflow
