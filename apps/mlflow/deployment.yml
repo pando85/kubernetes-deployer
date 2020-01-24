@@ -1,5 +1,4 @@
 ---
-# Source: docker-mlflow/templates/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,13 +27,13 @@ spec:
           - mlflow
           - server
           - --host
-          - 0.0.0.0
+          - "0.0.0.0"
           - --workers
-          - 1
+          - "1"
           - --backend-store-uri
           - /var/lib/mlflow
           - --expose-prometheus
-          - /tmp/test
+          - /dev/shm
           ports:
             - containerPort: 5000
           livenessProbe:
@@ -55,7 +54,13 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /var/lib/mlflow
+            - mountPath: /dev/shm
+              name: dshm
       volumes:
         - name: data
           persistentVolumeClaim:
             claimName: mlflow
+        - name: dshm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 5Mi
