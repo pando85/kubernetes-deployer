@@ -31,6 +31,18 @@ metadata:
     kubernetes.io/ingress.class: "nginx-internal"
 ```
 
+### Cache
+
+to activate cache add:
+
+```yaml
+  annotations:
+      nginx.ingress.kubernetes.io/proxy-buffering: "on"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        proxy_cache static-cache;
+```
+
+
 ## Future
 
 In order to support suffix to create FQDNs Kubernetes is working on `IngressClaim`.
