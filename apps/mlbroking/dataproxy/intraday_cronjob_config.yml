@@ -11,7 +11,9 @@ data:
     from datetime import datetime, timedelta
 
 
-    STOCKS = ['GOOGL', 'AMZN', 'AMD', 'MU', 'FB', 'INTC', 'NVDA', 'NXPI', 'QCOM', 'TSLA']
+    CUSTOM_STOCKS = ['GOOGL', 'AMZN', 'AMD', 'MU', 'FB', 'INTC', 'NVDA', 'NXPI', 'QCOM', 'TSLA', 'TXN']
+    ALL_NASDAQ = ['AAPL', 'MSFT', 'AMZN', 'FB', 'GOOG', 'GOOGL', 'INTC', 'CMCSA', 'CSCO', 'PEP', 'ADBE', 'AMGN', 'COST', 'NFLX', 'PYPL', 'NVDA', 'AVGO', 'TXN', 'CHTR', 'QCOM', 'SBUX', 'BKNG', 'GILD', 'CELG', 'MDLZ', 'FISV', 'ADP', 'TMUS', 'INTU', 'ISRG', 'CSX', 'TSLA', 'BIIB', 'MU', 'WBA', 'VRTX', 'AMAT', 'ILMN', 'ATVI', 'MAR', 'ROST', 'ADI', 'LRCX', 'KHC', 'NXPI', 'AMD', 'CTSH', 'REGN', 'ORLY', 'ADSK', 'XEL', 'MNST', 'SIRI', 'PAYX', 'EBAY', 'BIDU', 'JD', 'EA', 'CTAS', 'KLAC', 'WDAY', 'PCAR', 'DLTR', 'LULU', 'ALXN', 'WLTW', 'MELI', 'IDXX', 'VRSK', 'UAL', 'XLNX', 'MCHP', 'VRSN', 'CERN', 'FAST', 'NTES', 'ALGN', 'SNPS', 'ASML', 'EXPE', 'CDNS', 'INCY', 'CHKP', 'SWKS', 'CTRP', 'MXIM', 'WDC', 'SYMC', 'CTXS', 'ULTA', 'AAL', 'NTAP', 'WYNN', 'TTWO', 'BMRN', 'JBHT', 'LBTYK', 'HAS', 'FOXA', 'MYL', 'HSIC', 'FOX', 'LBTYA']
+    STOCKS = ALL_NASDAQ
 
 
     def get_intraday_data(company_stock_name: str, date: datetime):
@@ -23,7 +25,7 @@ data:
 
 
     if __name__ == '__main__':
-        day = datetime.today() - timedelta(days=1)
+        day = datetime.today() - timedelta(days=2)
         for stock in STOCKS:
             print(f'Stock: {stock}')
             get_intraday_data(stock, day)
