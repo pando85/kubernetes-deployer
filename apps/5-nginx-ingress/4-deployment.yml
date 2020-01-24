@@ -104,4 +104,4 @@ spec:
         - name: dshm
           emptyDir:
             medium: Memory
-            sizeLimit: 100Mi
+            sizeLimit: 303Mi
