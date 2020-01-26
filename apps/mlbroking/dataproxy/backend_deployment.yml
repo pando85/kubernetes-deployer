@@ -34,7 +34,7 @@ spec:
                   - database
       containers:
         - name: dataproxy
-          image: registry.k8s.grigri/dataproxy:2f056758fa01f1862f8a93913ee00c0ab61a6eb8
+          image: registry.k8s.grigri/dataproxy:3b1484f75395fcfc82518bfbaab4c06cd0579e6c
           ports:
             - name: http
               containerPort: 8080
