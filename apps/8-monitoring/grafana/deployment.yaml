@@ -110,6 +110,15 @@ spec:
         - mountPath: /grafana-dashboard-definitions/0/smartmon
           name: grafana-dashboard-smartmon
           readOnly: false
+        - mountPath: /grafana-dashboard-definitions/0/ceph-cluster
+          name: grafana-dashboard-ceph-cluster
+          readOnly: false
+        - mountPath: /grafana-dashboard-definitions/0/ceph-osd
+          name: grafana-dashboard-ceph-osd
+          readOnly: false
+        - mountPath: /grafana-dashboard-definitions/0/ceph-pools
+          name: grafana-dashboard-ceph-pools
+          readOnly: false
         - mountPath: /etc/grafana
           name: grafana-config
           readOnly: false
@@ -198,6 +207,15 @@ spec:
       - configMap:
           name: grafana-dashboard-smartmon
         name: grafana-dashboard-smartmon
+      - configMap:
+          name: grafana-dashboard-ceph-cluster
+        name: grafana-dashboard-ceph-cluster
+      - configMap:
+          name: grafana-dashboard-ceph-osd
+        name: grafana-dashboard-ceph-osd
+      - configMap:
+          name: grafana-dashboard-ceph-pools
+        name: grafana-dashboard-ceph-pools
       - name: grafana-config
         secret:
           secretName: grafana-config
