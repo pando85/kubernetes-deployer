@@ -50,8 +50,9 @@ spec:
   retention: 7d
   ruleSelector:
     matchLabels:
-      prometheus: k8s
       role: alert-rules
+    matchExpressions:
+      - {key: prometheus, operator: In, values: [k8s, rook-prometheus]}
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
