@@ -16,3 +16,11 @@
 ### ETCD: disable peer client cert authentication.
 # This affects ETCD_PEER_CLIENT_CERT_AUTH variable
 # etcd_peer_client_auth: true
+
+# etcd_heartbeat_interval: "250"
+etcd_heartbeat_interval: "600"
+# etcd_election_timeout: "5000"
+etcd_election_timeout: "10000"
+
+# etcd_snapshot_count: "10000"
+etcd_snapshot_count: "5000"

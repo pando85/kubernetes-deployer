@@ -1,4 +1,4 @@
 ---
 
-- import_playbook: kubespray/cluster.yml
+- import_playbook: ../../kubespray/cluster.yml
 
