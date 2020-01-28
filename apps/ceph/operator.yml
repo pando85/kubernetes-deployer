@@ -209,8 +209,8 @@ spec:
         #  value: "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0"
         - name: ROOK_CSI_REGISTRAR_IMAGE
           value: "colek42/csi-node-driver-registrar:latest"
-        #- name: ROOK_CSI_PROVISIONER_IMAGE
-        #  value: "quay.io/k8scsi/csi-provisioner:v1.4.0"
+        - name: ROOK_CSI_PROVISIONER_IMAGE
+          value: "registry.k8s.grigri/csi-provisioner:v1.5.0-rc1-21-ga8e6acfad"
         #- name: ROOK_CSI_SNAPSHOTTER_IMAGE
         #  value: "quay.io/k8scsi/csi-snapshotter:v1.2.2"
         #- name: ROOK_CSI_ATTACHER_IMAGE
