@@ -284,6 +284,13 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        resources:
+          limits:
+            cpu: 1
+            memory: 400Mi
+          requests:
+            cpu: 500m
+            memory: 150Mi
       # Uncomment it to run rook operator on the host network
       #hostNetwork: true
       volumes:
