@@ -4,4 +4,10 @@
   become: true
   roles:
     - smartd
-
+  tasks:
+    - name: install lvm
+      apt:
+        name: lvm2
+        state: latest
+      tags:
+        - ceph-dependencies
