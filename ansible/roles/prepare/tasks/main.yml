@@ -84,3 +84,9 @@
   tags:
     - custom-cas
   notify: update-ca-certificates
+
+- name: "Additional storage"
+  import_tasks: aditional_disk.yml
+  when: prepare_aditional_disk
+  tags:
+    - aditional-disk
