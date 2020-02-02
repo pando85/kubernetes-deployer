@@ -175,11 +175,10 @@ spec:
 
         # Enable the default version of the CSI CephFS driver. To start another version of the CSI driver, see image properties below.
         - name: ROOK_CSI_ENABLE_CEPHFS
-          value: "false"
-
+          value: "true"
         # Enable the default version of the CSI RBD driver. To start another version of the CSI driver, see image properties below.
         - name: ROOK_CSI_ENABLE_RBD
-          value: "false"
+          value: "true"
         - name: ROOK_CSI_ENABLE_GRPC_METRICS
           value: "false"
         # Enable deployment of snapshotter container in ceph-csi provisioner.

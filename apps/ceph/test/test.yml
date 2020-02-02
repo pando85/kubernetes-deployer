@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pv-claim
+  labels:
+    app: test
+spec:
+  storageClassName: rook-ceph-block
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+  labels:
+    app: test
+spec:
+  selector:
+    matchLabels:
+      app: test
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+      - image: debian:stretch-slim
+        imagePullPolicy: IfNotPresent
+        name: debian
+        command:
+        - sleep
+        - "1000"
+        volumeMounts:
+        - name: test-persistent-storage
+          mountPath: /storage
+      volumes:
+      - name: test-persistent-storage
+        persistentVolumeClaim:
+          claimName: test-pv-claim
