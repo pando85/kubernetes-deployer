@@ -1,6 +1,0 @@
----
-
-prepare_aditional_disk: true
-prepare_aditional_disk_directories:
-  - /var/lib/docker
-  - /var/lib/etcd

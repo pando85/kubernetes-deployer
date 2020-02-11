@@ -10,6 +10,7 @@
   filesystem:
     fstype: ext4
     dev: /dev/sda1
+    force: yes
 
 - name: Get UUID for partition
   command: blkid -s UUID -o value /dev/sda1
@@ -23,7 +24,7 @@
     src: "UUID={{ disk_blkid.stdout }}"
     fstype: ext4
     opts: defaults,noatime
-    state: present
+    state: mounted
 
 - name: Create a symbolic to directories
   file:

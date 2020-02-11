@@ -10,6 +10,3 @@ prepare_unused_services:
   - wpa_supplicant
 
 prepare_aditional_disk: false
-
-prepare_aditional_disk_directories:
-  - /var/lib/docker
