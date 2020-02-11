@@ -1,0 +1,28 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rook-ceph-rgw-my-store
+  namespace: rook-ceph
+  labels:
+    app: rook-ceph-rgw
+    ceph_daemon_id: my-store
+    rgw: my-store
+    rook_cluster: rook-ceph
+    rook_object_store: my-store
+  annotations:
+    certmanager.k8s.io/cluster-issuer: "internal"
+    kubernetes.io/ingress.class: "nginx-internal"
+spec:
+  rules:
+    - host: s3.k8s.grigri
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: rook-ceph-rgw-my-store
+              servicePort: 80
+  tls:
+    - hosts:
+      - s3.k8s.grigri
+      secretName: s3-tls
