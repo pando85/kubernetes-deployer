@@ -163,20 +163,20 @@ spec:
       - name: "sda"
       resources:
         limits:
-          cpu: "2000m"
+          cpu: "3"
           memory: "3072Mi"
         requests:
-          cpu: "500m"
+          cpu: "1"
           memory: "1024Mi"
     - name: "k8s-5"
       devices: # specific devices to use for storage can be specified for each node
       - name: "sda"
       resources:
         limits:
-          cpu: "2000m"
+          cpu: "3"
           memory: "3072Mi"
         requests:
-          cpu: "500m"
+          cpu: "1"
           memory: "1024Mi"
 
   # The section for configuring management of daemon disruptions during upgrade or fencing.
