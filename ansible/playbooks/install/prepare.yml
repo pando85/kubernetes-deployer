@@ -1,7 +1,7 @@
 ---
 #  ansible-playbook -i inventory/rock64-cluster/host.ini -K --limit {{ hosts }} prepare.yml
 
-- hosts: all
+- hosts: rock64
   any_errors_fatal: true
   become: true
   roles:
