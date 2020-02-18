@@ -1,18 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2020-01-27T16:10:04Z"
   name: rook-config-override
   namespace: rook-ceph
-  ownerReferences:
-  - apiVersion: ceph.rook.io/v1
-    blockOwnerDeletion: true
-    kind: CephCluster
-    name: rook-ceph
-    uid: 398c1014-65d7-42e5-8a3a-d3274e3e89fd
-  resourceVersion: "51971937"
-  selfLink: /api/v1/namespaces/rook-ceph/configmaps/rook-config-override
-  uid: 4c8e9202-9c41-43f6-95ab-560ac631537e
 data:
   config: |
     [global]

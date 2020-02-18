@@ -1,0 +1,9 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: ceph-bucket-swift-test
+spec:
+  bucketName: test-swift
+  storageClassName: rook-ceph-bucket-swift
+

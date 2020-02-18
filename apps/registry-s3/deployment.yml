@@ -1,0 +1,93 @@
+---
+# Source: docker-registry/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-registry-s3
+  namespace: registry-s3
+  labels:
+    app: docker-registry
+    release: s3
+spec:
+  selector:
+    matchLabels:
+      app: docker-registry
+      release: s3
+  replicas: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: docker-registry
+        release: s3
+      annotations:
+        checksum/config: 433b1deb8e148d92a6dbc67df307fe62285ea38c5743b042aa1e4092e769992b
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: docker-registry
+          image: "registry:2.7.1"
+          imagePullPolicy: IfNotPresent
+          command:
+          - /bin/registry
+          - serve
+          - /etc/docker/registry/config.yml
+          ports:
+            - containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+          resources:
+            limits:
+              cpu: 400m
+              memory: 256M
+            requests:
+              cpu: 100m
+              memory: 128M
+          env:
+            - name: REGISTRY_STORAGE_S3_ACCESSKEY
+              valueFrom:
+                secretKeyRef:
+                  name: registry
+                  key: AWS_ACCESS_KEY_ID
+            - name: REGISTRY_STORAGE_S3_SECRETKEY
+              valueFrom:
+                secretKeyRef:
+                  name: registry
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: REGISTRY_STORAGE
+              value: s3
+            - name: REGISTRY_STORAGE_S3_REGION
+              value: kubernetes.grigri
+            - name: REGISTRY_STORAGE_S3_REGIONENDPOINT
+              value: s3.k8s.grigri
+            - name: REGISTRY_STORAGE_S3_BUCKET
+              value: registry
+            - name: REGISTRY_STORAGE_S3_SECURE
+              value: "true"
+            - name: REGISTRY_HTTP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: docker-registry-s3
+                  key: haSharedSecret
+          volumeMounts:
+            - name: "docker-registry-s3"
+              mountPath: "/etc/docker/registry"
+            - name: ca-trust
+              mountPath: /etc/ssl/certs/ca-certificates.crt
+              readOnly: true
+      volumes:
+        - name: docker-registry-s3
+          configMap:
+            name: docker-registry-s3
+        - name: ca-trust
+          hostPath:
+            path: /etc/ssl/certs/ca-certificates.crt
+            type: File
