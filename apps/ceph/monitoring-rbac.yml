@@ -5,7 +5,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: rook-ceph-monitor
-  namespace: monitoring
+  namespace: rook-ceph
 rules:
 - apiGroups:
   - monitoring.coreos.com
@@ -21,7 +21,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: rook-ceph-monitor
-  namespace: monitoring
+  namespace: rook-ceph
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -31,42 +31,3 @@ subjects:
   name: rook-ceph-system
   namespace: rook-ceph
 # OLM: END ROLE BINDING
----
-# OLM: BEGIN ROLE
-# Aspects for metrics collection
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: rook-ceph-metrics
-  namespace: rook-ceph
-rules:
- - apiGroups:
-   - ""
-   resources:
-    - services
-    - endpoints
-    - pods
-   verbs:
-    - get
-    - list
-    - watch
-# OLM: END ROLE
----
-# OLM: BEGIN ROLE BINDING
-# Allow collection of metrics
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: rook-ceph-metrics
-  namespace: rook-ceph
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: rook-ceph-metrics
-subjects:
-- kind: ServiceAccount
-  # change to the serviceaccount and namespace to use for monitoring
-  name: prometheus-k8s
-  namespace: monitoring
-# OLM: END ROLE BINDING
----

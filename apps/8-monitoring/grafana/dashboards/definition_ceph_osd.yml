@@ -836,8 +836,8 @@ data:
         "list": [
           {
             "current": {
-                "text": "Prometheus",
-                "value": "Prometheus"
+              "text": "rook-prometheus",
+              "value": "rook-prometheus"
             },
             "hide": 0,
             "label": null,

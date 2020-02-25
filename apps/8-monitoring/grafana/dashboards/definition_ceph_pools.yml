@@ -22,7 +22,7 @@ data:
         },
         {
           "type": "datasource",
-          "id": "prometheus",
+          "id": "rook-prometheus",
           "name": "Prometheus",
           "version": "1.0.0"
         },
@@ -637,8 +637,8 @@ data:
         "list": [
           {
             "current": {
-                "text": "Prometheus",
-                "value": "Prometheus"
+              "text": "rook-prometheus",
+              "value": "rook-prometheus"
             },
             "hide": 0,
             "label": null,

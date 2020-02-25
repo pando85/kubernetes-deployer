@@ -51,8 +51,7 @@ spec:
   ruleSelector:
     matchLabels:
       role: alert-rules
-    matchExpressions:
-      - {key: prometheus, operator: In, values: [k8s, rook-prometheus]}
+      prometheus: k8s
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
@@ -60,7 +59,9 @@ spec:
   secrets:
     - etcd-client
   serviceAccountName: prometheus-k8s
-  serviceMonitorNamespaceSelector: {}
+  serviceMonitorNamespaceSelector:
+    matchExpressions:
+      - {key: prometheus, operator: NotIn, values: [rook-prometheus]}
   serviceMonitorSelector: {}
   version: v2.13.1
   storage:
