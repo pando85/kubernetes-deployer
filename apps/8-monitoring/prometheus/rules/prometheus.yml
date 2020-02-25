@@ -1,0 +1,29 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    prometheus: k8s
+    role: alert-rules
+  name: prometheus-k8s-meta-monitoring
+  namespace: monitoring
+spec:
+  groups:
+  - name: prometheus-meta-monitoring
+    rules:
+    - alert: PrometheusK8sDown
+      annotations:
+        message: Prometheus K8s has disappeared from Prometheus K8s target discovery.
+      expr: |
+        absent(up{job="prometheus-k8s",namespace="monitoring"} == 1)
+      for: 15m
+      labels:
+        severity: critical
+    - alert: PrometheusRookDown
+      annotations:
+        message: Prometheus Rook has disappeared from Prometheus K8s target discovery.
+      expr: |
+        absent(up{job="rook-prometheus",namespace="rook-ceph"} == 1)
+      for: 15m
+      labels:
+        severity: critical

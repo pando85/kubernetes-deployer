@@ -461,12 +461,12 @@ spec:
       for: 15m
       labels:
         severity: critical
-    - alert: PrometheusDown
+    - alert: PrometheusRookDown
       annotations:
-        message: Prometheus has disappeared from Prometheus target discovery.
+        message: Prometheus Rook has disappeared from Prometheus target discovery.
         runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-prometheusdown
       expr: |
-        absent(up{job="prometheus-k8s",namespace="monitoring"} == 1)
+        absent(up{job="rook-prometheus",namespace="rook-ceph"} == 1)
       for: 15m
       labels:
         severity: critical

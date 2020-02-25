@@ -39,7 +39,7 @@ spec:
   additionalScrapeConfigs:
     name: blackbox-scrape
     key: blackbox.yaml
-  replicas: 2
+  replicas: 1
   resources:
     requests:
       cpu: 1000m
@@ -59,14 +59,15 @@ spec:
   secrets:
     - etcd-client
   serviceAccountName: prometheus-k8s
-  serviceMonitorNamespaceSelector:
-    matchExpressions:
-      - {key: prometheus, operator: NotIn, values: [rook-prometheus]}
-  serviceMonitorSelector: {}
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      prometheus: k8s
   version: v2.13.1
   storage:
     volumeClaimTemplate:
       spec:
+        storageClassName: rook-ceph-block
         accessModes:
         - ReadWriteOnce
         resources:

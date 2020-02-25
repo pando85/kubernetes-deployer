@@ -3,6 +3,8 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: prometheus
+    team: rook
+    prometheus: k8s
   name: prometheus
   namespace: monitoring
 spec:

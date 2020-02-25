@@ -4,6 +4,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: arm-exporter
+    prometheus: k8s
   name: arm-exporter
   namespace: monitoring
 spec:

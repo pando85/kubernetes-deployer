@@ -6,6 +6,7 @@ metadata:
   namespace: monitoring
   labels:
     app: kube-etcd
+    prometheus: k8s
 spec:
   endpoints:
   - interval: 10s

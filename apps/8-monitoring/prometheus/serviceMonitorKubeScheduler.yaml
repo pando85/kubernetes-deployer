@@ -3,6 +3,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: kube-scheduler
+    prometheus: k8s
   name: kube-scheduler
   namespace: monitoring
 spec:

@@ -3,6 +3,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: alertmanager
+    prometheus: k8s
   name: alertmanager
   namespace: monitoring
 spec:

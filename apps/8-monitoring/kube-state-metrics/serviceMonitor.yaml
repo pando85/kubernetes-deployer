@@ -3,6 +3,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: kube-state-metrics
+    prometheus: k8s
   name: kube-state-metrics
   namespace: monitoring
 spec:

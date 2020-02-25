@@ -4,6 +4,7 @@ kind: ServiceMonitor
 metadata:
   labels:
     k8s-app: node-exporter
+    prometheus: k8s
   name: node-exporter
   namespace: monitoring
 spec:

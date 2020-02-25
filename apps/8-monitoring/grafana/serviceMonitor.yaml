@@ -3,6 +3,8 @@ kind: ServiceMonitor
 metadata:
   name: grafana
   namespace: monitoring
+  labels:
+    prometheus: k8s
 spec:
   endpoints:
   - interval: 15s
