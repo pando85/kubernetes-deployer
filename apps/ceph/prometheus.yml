@@ -99,11 +99,11 @@ spec:
   replicas: 1
   resources:
     requests:
-      cpu: 300m
-      memory: 256Mi
+      cpu: 100m
+      memory: 128Mi
     limits:
-      cpu: 1000m
-      memory: 1024Mi
+      cpu: 500m
+      memory: 512Mi
   retention: 7d
   ruleSelector:
     matchLabels:
