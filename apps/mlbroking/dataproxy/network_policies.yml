@@ -1,0 +1,138 @@
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: default-deny
+  namespace: mlbroking
+spec:
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+  - Ingress
+  - Egress
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: dataproxy.database
+  namespace: mlbroking
+spec:
+  podSelector:
+    matchLabels:
+      app: dataproxy
+      tier: database
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: dataproxy
+          tier: backend
+    ports:
+    - port: 5432
+      protocol: TCP
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: dataproxy
+          tier: backend
+  - to:
+    - ipBlock:
+        cidr: 169.254.25.10/32
+    ports:
+    - protocol: UDP
+      port: 53
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: dataproxy.backend
+  namespace: mlbroking
+spec:
+  podSelector:
+    matchLabels:
+      app: dataproxy
+      tier: backend
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: nginx-ingress-internal
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: nginx-ingress
+    ports:
+    - port: http
+      protocol: TCP
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: dataproxy
+          tier: database
+    ports:
+    - port: 5432
+      protocol: TCP
+  - to:
+    - podSelector:
+        matchLabels:
+          app: nginx-ingress-internal
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: nginx-ingress
+  - to:
+    - ipBlock:
+        cidr: 169.254.25.10/32
+    ports:
+    - protocol: UDP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    ports:
+    - protocol: TCP
+      port: 443
+
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: dataproxy.cronjob
+  namespace: mlbroking
+spec:
+  podSelector:
+    matchLabels:
+      app: dataproxy
+      tier: cronjob
+  policyTypes:
+  - Ingress
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: dataproxy
+          tier: backend
+    ports:
+    - port: http
+      protocol: TCP
+  - to:
+    - ipBlock:
+        cidr: 169.254.25.10/32
+    ports:
+    - protocol: UDP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    ports:
+    - protocol: TCP
+      port: 443

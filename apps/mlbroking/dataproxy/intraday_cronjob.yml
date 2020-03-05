@@ -8,6 +8,10 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: dataproxy
+            tier: cronjob
         spec:
           containers:
           - name: dataproxy-intraday-collect
