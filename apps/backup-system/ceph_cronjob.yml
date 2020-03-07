@@ -1,0 +1,178 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: ceph-backup-claim
+  namespace: backup-system
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "grigri-dataset-backup"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ceph-backup-k8s-3
+  namespace: backup-system
+spec:
+  schedule: "3 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-ceph
+            image: alpine:3.9
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "cp -apT /var/lib/rook /backup/k8s-3"
+            volumeMounts:
+            - mountPath: /var/lib/rook/
+              name: ceph-directory
+              readOnly: true
+            - mountPath: /backup
+              name: backup
+          restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: k8s-3
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          hostNetwork: true
+          volumes:
+          - name: ceph-directory
+            hostPath:
+              path: /var/lib/rook/
+              type: Directory
+          - name: backup
+            persistentVolumeClaim:
+              claimName: ceph-backup-claim
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ceph-backup-k8s-4
+  namespace: backup-system
+spec:
+  schedule: "4 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-ceph
+            image: alpine:3.9
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "cp -apT /var/lib/rook /backup/k8s-4"
+            volumeMounts:
+            - mountPath: /var/lib/rook/
+              name: ceph-directory
+              readOnly: true
+            - mountPath: /backup
+              name: backup
+          restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: k8s-4
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          hostNetwork: true
+          volumes:
+          - name: ceph-directory
+            hostPath:
+              path: /var/lib/rook/
+              type: Directory
+          - name: backup
+            persistentVolumeClaim:
+              claimName: ceph-backup-claim
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ceph-backup-k8s-5
+  namespace: backup-system
+spec:
+  schedule: "5 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-ceph
+            image: alpine:3.9
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "cp -apT /var/lib/rook /backup/k8s-5"
+            volumeMounts:
+            - mountPath: /var/lib/rook/
+              name: ceph-directory
+              readOnly: true
+            - mountPath: /backup
+              name: backup
+          restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: k8s-5
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          hostNetwork: true
+          volumes:
+          - name: ceph-directory
+            hostPath:
+              path: /var/lib/rook/
+              type: Directory
+          - name: backup
+            persistentVolumeClaim:
+              claimName: ceph-backup-claim
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ceph-backup-k8s-6
+  namespace: backup-system
+spec:
+  schedule: "6 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-ceph
+            image: alpine:3.9
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "cp -apT /var/lib/rook /backup/k8s-6"
+            volumeMounts:
+            - mountPath: /var/lib/rook/
+              name: ceph-directory
+              readOnly: true
+            - mountPath: /backup
+              name: backup
+          restartPolicy: OnFailure
+          nodeSelector:
+            kubernetes.io/hostname: k8s-6
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          hostNetwork: true
+          volumes:
+          - name: ceph-directory
+            hostPath:
+              path: /var/lib/rook/
+              type: Directory
+          - name: backup
+            persistentVolumeClaim:
+              claimName: ceph-backup-claim

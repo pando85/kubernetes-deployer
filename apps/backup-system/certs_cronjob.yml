@@ -1,0 +1,60 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: certs-backup-claim
+  namespace: backup-system
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "grigri-dataset-backup"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Mi
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: certs-backup
+  namespace: backup-system
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup-certs
+            image: alpine:3.9
+            command:
+              - "/bin/sh"
+              - "-c"
+              - "cp -p /etc/kubernetes/ssl/* /backup/"
+            volumeMounts:
+            - mountPath: /etc/kubernetes/ssl/
+              name: kubernetes-certs
+              readOnly: true
+            - mountPath: /backup
+              name: backup
+          restartPolicy: OnFailure
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: node-role.kubernetes.io/master
+                    operator: Exists
+          tolerations:
+          - effect: NoSchedule
+            operator: Exists
+          hostNetwork: true
+          volumes:
+          - name: kubernetes-certs
+            hostPath:
+              path: /etc/kubernetes/ssl/
+              type: Directory
+          - name: backup
+            persistentVolumeClaim:
+              claimName: certs-backup-claim
