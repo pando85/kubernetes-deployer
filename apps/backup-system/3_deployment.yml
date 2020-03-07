@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-client-provisioner
+  namespace: backup-system
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
+  template:
+    metadata:
+      labels:
+        app: nfs-client-provisioner
+    spec:
+      serviceAccount: nfs-client-provisioner
+      containers:
+        - name: nfs-client-provisioner
+          image: quay.io/external_storage/nfs-client-provisioner-arm:latest
+          volumeMounts:
+            - name: nfs-client-root
+              mountPath: /persistentvolumes
+          env:
+            - name: PROVISIONER_NAME
+              value: nfs-provisioner/nfs-grigri-dataset-backup
+            - name: NFS_SERVER
+              value: grigri.grigri
+            - name: NFS_PATH
+              value: /datasets/kubernetes-backup
+          resources:
+            limits:
+              cpu: 400m
+              memory: 64M
+            requests:
+              cpu: 10m
+              memory: 32M
+      volumes:
+        - name: nfs-client-root
+          nfs:
+            server: grigri.grigri
+            path: /datasets/kubernetes-backup

@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: grigri-dataset-backup
+provisioner: nfs-provisioner/nfs-grigri-dataset-backup
+parameters:
+  archiveOnDelete: "true"
