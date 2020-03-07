@@ -1,5 +1,6 @@
+---
+apiVersion: apps/v1
 kind: Deployment
-apiVersion: extensions/v1beta1
 metadata:
   name: nfs-client-provisioner
   namespace: nfs-storage
@@ -7,6 +8,9 @@ spec:
   replicas: 1
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app: nfs-client-provisioner
   template:
     metadata:
       labels:
@@ -26,6 +30,13 @@ spec:
               value: grigri.grigri
             - name: NFS_PATH
               value: /datasets/kubernetes
+          resources:
+            limits:
+              cpu: 400m
+              memory: 64M
+            requests:
+              cpu: 10m
+              memory: 32M
       volumes:
         - name: nfs-client-root
           nfs:
