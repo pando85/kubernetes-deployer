@@ -6,33 +6,6 @@ metadata:
 data:
   smartmon.json: |-
     {
-      "__inputs": [],
-      "__requires": [
-        {
-          "type": "grafana",
-          "id": "grafana",
-          "name": "Grafana",
-          "version": "4.6.1"
-        },
-        {
-          "type": "panel",
-          "id": "graph",
-          "name": "Graph",
-          "version": ""
-        },
-        {
-          "type": "datasource",
-          "id": "prometheus",
-          "name": "Prometheus",
-          "version": "1.0.0"
-        },
-        {
-          "type": "panel",
-          "id": "table",
-          "name": "Table",
-          "version": ""
-        }
-      ],
       "annotations": {
         "list": [
           {
@@ -50,455 +23,459 @@ data:
       "editable": true,
       "gnetId": 3992,
       "graphTooltip": 0,
-      "hideControls": false,
-      "id": null,
+      "iteration": 1583698216516,
       "links": [],
-      "rows": [
+      "panels": [
         {
-          "collapse": false,
+          "columns": [],
+          "datasource": "prometheus",
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
           "height": "170px",
-          "panels": [
+          "id": 4,
+          "links": [],
+          "options": {},
+          "pageSize": null,
+          "scroll": true,
+          "showHeader": true,
+          "sort": {
+            "col": 0,
+            "desc": true
+          },
+          "styles": [
             {
-              "columns": [],
-              "datasource": "prometheus",
-              "fontSize": "100%",
-              "height": "170px",
-              "id": 4,
-              "links": [],
-              "pageSize": null,
-              "scroll": true,
-              "showHeader": true,
-              "sort": {
-                "col": 0,
-                "desc": true
-              },
-              "span": 12,
-              "styles": [
-                {
-                  "alias": "Time",
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "pattern": "Time",
-                  "type": "date"
-                },
-                {
-                  "alias": "",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "decimals": 2,
-                  "pattern": "/.*/",
-                  "thresholds": [],
-                  "type": "number",
-                  "unit": "short"
-                }
-              ],
-              "targets": [
-                {
-                  "expr": "smartmon_device_smart_healthy{instance=~\"$instance\"} < 1",
-                  "format": "table",
-                  "interval": "",
-                  "intervalFactor": 2,
-                  "legendFormat": "",
-                  "refId": "A"
-                }
-              ],
-              "title": "Unhealthy Disks",
-              "transform": "table",
-              "type": "table"
-            }
-          ],
-          "repeat": null,
-          "repeatIteration": null,
-          "repeatRowId": null,
-          "showTitle": false,
-          "title": "Dashboard Row",
-          "titleSize": "h6"
-        },
-        {
-          "collapse": false,
-          "height": "250px",
-          "panels": [
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "prometheus",
-              "fill": 0,
-              "id": 1,
-              "legend": {
-                "alignAsTable": true,
-                "avg": true,
-                "current": true,
-                "max": true,
-                "min": true,
-                "rightSide": true,
-                "show": true,
-                "sideWidth": null,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "links": [],
-              "nullPointMode": "null",
-              "percentage": false,
-              "pointradius": 1,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "span": 12,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "expr": "avg(smartmon_temperature_celsius_value{instance=~\"$instance\"}) by (instance, disk)",
-                  "format": "time_series",
-                  "hide": false,
-                  "interval": "1m",
-                  "intervalFactor": 2,
-                  "legendFormat": "val {{instance}} {{disk}}",
-                  "refId": "B"
-                },
-                {
-                  "expr": "avg(smartmon_temperature_celsius_raw_value{instance=~\"$instance\"}) by (instance, disk)",
-                  "format": "time_series",
-                  "hide": false,
-                  "interval": "1m",
-                  "intervalFactor": 2,
-                  "legendFormat": "raw {{instance}} {{disk}}",
-                  "refId": "A"
-                }
-              ],
-              "thresholds": [],
-              "timeFrom": null,
-              "timeShift": null,
-              "title": "Disk Temperature",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ]
-            }
-          ],
-          "repeat": null,
-          "repeatIteration": null,
-          "repeatRowId": null,
-          "showTitle": false,
-          "title": "Dashboard Row",
-          "titleSize": "h6"
-        },
-        {
-          "collapse": false,
-          "height": 250,
-          "panels": [
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "prometheus",
-              "fill": 1,
-              "id": 2,
-              "legend": {
-                "alignAsTable": true,
-                "avg": true,
-                "current": true,
-                "max": true,
-                "min": true,
-                "rightSide": true,
-                "show": true,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "links": [],
-              "nullPointMode": "null",
-              "percentage": false,
-              "pointradius": 5,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "span": 6,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "expr": "avg(smartmon_raw_read_error_rate_value{instance=~\"$instance\"}) by (instance, disk)",
-                  "format": "time_series",
-                  "intervalFactor": 2,
-                  "legendFormat": "val {{instance}} {{disk}}",
-                  "refId": "A"
-                },
-                {
-                  "expr": "avg(smartmon_spin_retry_count_raw_value{instance=~\"$instance\"}) by (instance, disk)",
-                  "format": "time_series",
-                  "interval": "",
-                  "intervalFactor": 2,
-                  "legendFormat": "raw {{instance}} {{disk}}",
-                  "refId": "B"
-                }
-              ],
-              "thresholds": [],
-              "timeFrom": null,
-              "timeShift": null,
-              "title": "Raw Error Read Rate",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ]
-            }
-          ],
-          "repeat": null,
-          "repeatIteration": null,
-          "repeatRowId": null,
-          "showTitle": false,
-          "title": "Dashboard Row",
-          "titleSize": "h6"
-        },
-        {
-          "collapse": false,
-          "height": 250,
-          "panels": [
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "prometheus",
-              "fill": 1,
-              "id": 5,
-              "legend": {
-                "alignAsTable": true,
-                "avg": true,
-                "current": true,
-                "max": true,
-                "min": true,
-                "rightSide": true,
-                "show": true,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "links": [],
-              "nullPointMode": "null",
-              "percentage": false,
-              "pointradius": 5,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "span": 6,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "expr": "smartmon_reallocated_sector_ct_raw_value{instance=~\"$instance\"}",
-                  "format": "time_series",
-                  "intervalFactor": 2,
-                  "legendFormat": "raw {{instance}} {{disk}}",
-                  "refId": "B"
-                },
-                {
-                  "expr": "smartmon_reallocated_sector_ct_value{instance=~\"$instance\"}",
-                  "format": "time_series",
-                  "interval": "",
-                  "intervalFactor": 2,
-                  "legendFormat": "val {{instance}} {{disk}}",
-                  "refId": "A"
-                }
-              ],
-              "thresholds": [],
-              "timeFrom": null,
-              "timeShift": null,
-              "title": "Reallocated Sectors",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": "0",
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ]
+              "alias": "Time",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "date"
             },
             {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "prometheus",
-              "fill": 1,
-              "id": 6,
-              "legend": {
-                "alignAsTable": true,
-                "avg": true,
-                "current": true,
-                "max": true,
-                "min": true,
-                "rightSide": true,
-                "show": true,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "links": [],
-              "nullPointMode": "null",
-              "percentage": false,
-              "pointradius": 5,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "span": 6,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "expr": "smartmon_current_pending_sector_raw_value{instance=~\"$instance\"}",
-                  "format": "time_series",
-                  "intervalFactor": 2,
-                  "legendFormat": "raw {{instance}} {{disk}}",
-                  "refId": "B"
-                },
-                {
-                  "expr": "smartmon_current_pending_sector_value{instance=~\"$instance\"}",
-                  "format": "time_series",
-                  "interval": "",
-                  "intervalFactor": 2,
-                  "legendFormat": "val {{instance}} {{disk}}",
-                  "refId": "A"
-                }
+              "alias": "",
+              "colorMode": null,
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
               ],
+              "decimals": 2,
+              "pattern": "/.*/",
               "thresholds": [],
-              "timeFrom": null,
-              "timeShift": null,
-              "title": "Current Pending Sectors",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": "0",
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ]
+              "type": "number",
+              "unit": "short"
             }
           ],
-          "repeat": null,
-          "repeatIteration": null,
-          "repeatRowId": null,
-          "showTitle": false,
-          "title": "Dashboard Row",
-          "titleSize": "h6"
+          "targets": [
+            {
+              "expr": "smartmon_device_smart_healthy{instance=~\"$instance\"} < 1",
+              "format": "table",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "Unhealthy Disks",
+          "transform": "table",
+          "type": "table"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 5
+          },
+          "id": 1,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": null,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 1,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "avg(smartmon_temperature_celsius_raw_value{instance=~\"$instance\"}) by (instance, disk)",
+              "format": "time_series",
+              "hide": false,
+              "interval": "1m",
+              "intervalFactor": 5,
+              "legendFormat": "raw {{instance}} {{disk}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Disk Temperature",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "celsius",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 12
+          },
+          "id": 2,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "avg(smartmon_raw_read_error_rate_value{instance=~\"$instance\"}) by (instance, disk)",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "val {{instance}} {{disk}}",
+              "refId": "A"
+            },
+            {
+              "expr": "avg(smartmon_spin_retry_count_raw_value{instance=~\"$instance\"}) by (instance, disk)",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "raw {{instance}} {{disk}}",
+              "refId": "B"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Raw Error Read Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 12
+          },
+          "id": 6,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "smartmon_current_pending_sector_raw_value{instance=~\"$instance\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "raw {{instance}} {{disk}}",
+              "refId": "B"
+            },
+            {
+              "expr": "smartmon_current_pending_sector_value{instance=~\"$instance\"}",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "val {{instance}} {{disk}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Current Pending Sectors",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "prometheus",
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 19
+          },
+          "id": 5,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "smartmon_reallocated_sector_ct_raw_value{instance=~\"$instance\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "raw {{instance}} {{disk}}",
+              "refId": "B"
+            },
+            {
+              "expr": "smartmon_reallocated_sector_ct_value{instance=~\"$instance\"}",
+              "format": "time_series",
+              "interval": "",
+              "intervalFactor": 2,
+              "legendFormat": "val {{instance}} {{disk}}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Reallocated Sectors",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
         }
       ],
-      "schemaVersion": 14,
+      "schemaVersion": 19,
       "style": "dark",
       "tags": [
         "prometheus",
@@ -509,8 +486,12 @@ data:
         "list": [
           {
             "allValue": null,
-            "current": {},
+            "current": {
+              "text": "All",
+              "value": "$__all"
+            },
             "datasource": "prometheus",
+            "definition": "",
             "hide": 0,
             "includeAll": true,
             "label": null,
@@ -520,6 +501,7 @@ data:
             "query": "label_values(smartmon_smartctl_version, instance)",
             "refresh": 1,
             "regex": "",
+            "skipUrlSync": false,
             "sort": 1,
             "tagValuesQuery": "",
             "tags": [],
@@ -560,5 +542,6 @@ data:
       },
       "timezone": "browser",
       "title": "Smartmon Textfile",
-      "version": 6
+      "uid": "NIadX9PWk",
+      "version": 7
     }
