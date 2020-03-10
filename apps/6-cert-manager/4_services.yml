@@ -9,9 +9,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
 spec:
   type: ClusterIP
   ports:
@@ -20,7 +18,7 @@ spec:
       targetPort: 9402
   selector:
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
 
 ---
 # Source: cert-manager/templates/webhook-service.yaml
@@ -32,9 +30,7 @@ metadata:
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
 spec:
   type: ClusterIP
   ports:
@@ -44,5 +40,4 @@ spec:
   selector:
     app: webhook
     app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
+    app.kubernetes.io/instance: cert-manager

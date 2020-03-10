@@ -8,9 +8,7 @@ metadata:
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
   annotations:
     certmanager.k8s.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-tls"
 spec:
@@ -30,9 +28,7 @@ metadata:
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
   annotations:
     certmanager.k8s.io/inject-apiserver-ca: "true"
 webhooks:
@@ -71,9 +67,7 @@ metadata:
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
   annotations:
     certmanager.k8s.io/inject-apiserver-ca: "true"
 webhooks:

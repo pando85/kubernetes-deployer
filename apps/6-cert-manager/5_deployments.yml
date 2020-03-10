@@ -8,26 +8,20 @@ metadata:
   labels:
     app: cainjector
     app.kubernetes.io/name: cainjector
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cainjector-v0.10.0
+    app.kubernetes.io/instance: cert-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: cainjector
       app.kubernetes.io/name: cainjector
-      app.kubernetes.io/instance:  cert-manager
-      app.kubernetes.io/managed-by: Tiller
+      app.kubernetes.io/instance: cert-manager
   template:
     metadata:
       labels:
         app: cainjector
         app.kubernetes.io/name: cainjector
-        app.kubernetes.io/instance:  cert-manager
-        app.kubernetes.io/managed-by: Tiller
-        helm.sh/chart: cainjector-v0.10.0
-      annotations:
+        app.kubernetes.io/instance: cert-manager
     spec:
       serviceAccountName: cert-manager-cainjector
       containers:
@@ -43,7 +37,9 @@ spec:
               fieldRef:
                 fieldPath: metadata.namespace
           resources:
-            {}
+            requests:
+              cpu: 20m
+              memory: 32Mi
 
 
 ---
@@ -56,29 +52,20 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: cert-manager
       app.kubernetes.io/name: cert-manager
-      app.kubernetes.io/instance:  cert-manager
-      app.kubernetes.io/managed-by: Tiller
+      app.kubernetes.io/instance: cert-manager
   template:
     metadata:
       labels:
         app: cert-manager
         app.kubernetes.io/name: cert-manager
-        app.kubernetes.io/instance:  cert-manager
-        app.kubernetes.io/managed-by: Tiller
-        helm.sh/chart: cert-manager-v0.10.0
-      annotations:
-        prometheus.io/path: "/metrics"
-        prometheus.io/scrape: 'true'
-        prometheus.io/port: '9402'
+        app.kubernetes.io/instance: cert-manager
     spec:
       serviceAccountName: cert-manager
       containers:
@@ -116,26 +103,20 @@ metadata:
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
-    app.kubernetes.io/instance:  cert-manager
-    app.kubernetes.io/managed-by: Tiller
-    helm.sh/chart: cert-manager-v0.10.0
+    app.kubernetes.io/instance: cert-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: webhook
       app.kubernetes.io/name: webhook
-      app.kubernetes.io/instance:  cert-manager
-      app.kubernetes.io/managed-by: Tiller
+      app.kubernetes.io/instance: cert-manager
   template:
     metadata:
       labels:
         app: webhook
         app.kubernetes.io/name: webhook
-        app.kubernetes.io/instance:  cert-manager
-        app.kubernetes.io/managed-by: Tiller
-        helm.sh/chart: cert-manager-v0.10.0
-      annotations:
+        app.kubernetes.io/instance: cert-manager
     spec:
       serviceAccountName: cert-manager-webhook
       containers:
