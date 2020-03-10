@@ -119,6 +119,9 @@ spec:
         - mountPath: /grafana-dashboard-definitions/0/ceph-pools
           name: grafana-dashboard-ceph-pools
           readOnly: false
+        - mountPath: /grafana-dashboard-definitions/0/cert-manager
+          name: grafana-dashboard-cert-manager
+          readOnly: false
         - mountPath: /etc/grafana
           name: grafana-config
           readOnly: false
@@ -216,6 +219,9 @@ spec:
       - configMap:
           name: grafana-dashboard-ceph-pools
         name: grafana-dashboard-ceph-pools
+      - configMap:
+          name: grafana-dashboard-cert-manager
+        name: grafana-dashboard-cert-manager
       - name: grafana-config
         secret:
           secretName: grafana-config
