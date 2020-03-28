@@ -87,6 +87,6 @@
 
 - name: "Additional storage"
   import_tasks: aditional_disk.yml
-  when: prepare_aditional_disk
+  when: prepare_additional_disk
   tags:
     - aditional-disk

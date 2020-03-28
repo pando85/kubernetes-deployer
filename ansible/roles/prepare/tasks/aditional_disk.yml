@@ -10,7 +10,7 @@
   filesystem:
     fstype: ext4
     dev: /dev/sda1
-    force: yes
+    force: "{{ prepare_additional_disks_force_format }}"
 
 - name: Get UUID for partition
   command: blkid -s UUID -o value /dev/sda1
@@ -31,4 +31,4 @@
     src: "/mnt/{{ item | basename }}"
     dest: "{{ item }}"
     state: link
-  loop: "{{ prepare_aditional_disk_directories }}"
+  loop: "{{ prepare_additional_disk_directories }}"

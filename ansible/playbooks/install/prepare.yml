@@ -6,3 +6,4 @@
   become: true
   roles:
     - prepare
+    - geerlingguy.ntp

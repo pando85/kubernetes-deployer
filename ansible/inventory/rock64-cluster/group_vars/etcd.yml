@@ -34,6 +34,6 @@ system_cpu_reserved: 500m
 system_master_memory_reserved: 200M
 system_master_cpu_reserved: 500m
 
-prepare_aditional_disk: true
-prepare_aditional_disk_directories:
+prepare_additional_disk: true
+prepare_additional_disk_directories:
   - /var/lib/etcd
