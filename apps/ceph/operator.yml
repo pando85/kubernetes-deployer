@@ -183,7 +183,7 @@ spec:
           value: "false"
         # Enable deployment of snapshotter container in ceph-csi provisioner.
         - name: CSI_ENABLE_SNAPSHOTTER
-          value: "false"
+          value: "true"
         # Set logging level for csi containers.
         # Supported values from 0 to 5. 0 for general useful logs, 5 for trace level verbosity.
         #- name: CSI_LOG_LEVEL
@@ -208,16 +208,14 @@ spec:
         #  value: "quay.io/cephcsi/cephcsi:v2.0.0"
         - name: ROOK_CSI_CEPH_IMAGE
           value: "quay.io/cephcsi/cephcsi:v2.0.0-arm64"
-        #- name: ROOK_CSI_REGISTRAR_IMAGE
-        #  value: "quay.io/k8scsi/csi-node-driver-registrar:v1.2.0"
         - name: ROOK_CSI_REGISTRAR_IMAGE
           value: "colek42/csi-node-driver-registrar:latest"
         - name: ROOK_CSI_RESIZER_IMAGE
           value: "registry.k8s.grigri/csi-resizer:v0.4.0"
         - name: ROOK_CSI_PROVISIONER_IMAGE
           value: "registry.k8s.grigri/csi-provisioner:v1.5.0-rc1-21-ga8e6acfad"
-        #- name: ROOK_CSI_SNAPSHOTTER_IMAGE
-        #  value: "quay.io/k8scsi/csi-snapshotter:v1.2.2"
+        - name: ROOK_CSI_SNAPSHOTTER_IMAGE
+          value: "madhupr001/csi-snapshotter:v1.2.0-arm64"
         - name: ROOK_CSI_ATTACHER_IMAGE
           value: "registry.k8s.grigri/csi-attacher:v2.1.0-8-g57193d79"
         # kubelet directory path, if kubelet configured to use other than /var/lib/kubelet path.
