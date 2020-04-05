@@ -67,7 +67,7 @@ spec:
   storage:
     volumeClaimTemplate:
       spec:
-        storageClassName: rook-ceph-block
+        storageClassName: grigri-dataset
         accessModes:
         - ReadWriteOnce
         resources:
