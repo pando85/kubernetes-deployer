@@ -10,6 +10,10 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-buffering: "on"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_cache static-cache;
+      add_header X-Cache-Status $upstream_cache_status;
+      proxy_cache_key $host$uri$is_args$args;
+      proxy_cache_valid 200 24h;
+      proxy_cache_bypass $http_pragma;
     prometheus.io/probe: "true"
 spec:
   tls:
