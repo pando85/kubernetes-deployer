@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/part-of: nginx-ingress
     app: nginx-ingress-internal
 spec:
-  replicas: 2
+  replicas: 6
   selector:
     matchLabels:
       app.kubernetes.io/name: nginx-ingress
