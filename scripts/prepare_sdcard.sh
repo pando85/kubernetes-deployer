@@ -1,20 +1,28 @@
 #!/bin/bash
 set -ex
-export K8S_HOSTNAME=$1
-export IMAGE=/home/agil/distros/bionic-containers-rock64-0.8.3-1141-arm64.img
+IMAGE=$1
+K8S_HOSTNAME=$2
 
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root"
    exit 1
 fi
 
-if [[ -z $K8S_HOSTNAME ]]; then
-    echo "Usage: sudo ./prepare_sdcard.sh k8s-1 "
+if [[ -z $IMAGE ]] || [[ -z $K8S_HOSTNAME ]]; then
+    echo "Usage: sudo ./prepare_sdcard.sh distros/Armbian_20.05.4_Odroidc4_focal_current_5.6.18.img k8s-1 "
 fi
 
 bash -c "dd if=$IMAGE  of=/dev/mmcblk0 bs=1M conv=sync"
 sleep 2
-mount /dev/mmcblk0p7 /mnt
-sed -i "s/rock64/$K8S_HOSTNAME/g" /mnt/etc/hostname
-sed -i "s/rock64/$K8S_HOSTNAME/g" /mnt/etc/hosts
+
+if echo $IMAGE | grep -i rock64; then
+    HOSTNAME=rock64
+else
+    HOSTNAME=odroid-c4
+fi
+
+mount /dev/mmcblk0p1 /mnt
+sed -i "s/$HOSTNAME/$K8S_HOSTNAME/g" /mnt/etc/hostname
+sed -i "s/$HOSTNAME/$K8S_HOSTNAME/g" /mnt/etc/hosts
+rm /mnt/etc/profile.d/armbian-check-first-login.sh
 umount /mnt

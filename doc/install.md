@@ -1,15 +1,27 @@
-- [Install](#install)
-  - [Flash SDs](#flash-sds)
-  - [Network](#network)
-  - [Setup Rock64](#setup-rock64)
-  - [Cluster](#cluster)
+# Install <!-- omit in toc -->
 
-# Install
+- [Flash SDs](#flash-sds)
+  - [Naming convention](#naming-convention)
+- [Network](#network)
+- [Setup Rock64](#setup-rock64)
+- [Cluster](#cluster)
 
 ## Flash SDs
 
-- Rock64: format all SDs with [last bionic-containers-rock64 image](https://github.com/ayufan-rock64/linux-build/releases)
-- Replace `/etc/hostname` and `/etc/hosts` using new hostname
+- rock64: [image](https://www.armbian.com/rock64/)
+- odroid-c4: [image](https://www.armbian.com/odroid-c4/)
+
+Use script from `scripts/prepare_sdcard.sh` to prepare instances.
+
+### Naming convention
+
+All nodes must be named with prefix `k8s-{hardware_tag}-{numerical_id}`.
+
+For example:
+
+- k8s-rock64-3
+- k8s-odroid-1
+- k8s-atom-1
 
 ## Network
 
