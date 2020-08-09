@@ -9,5 +9,11 @@ prepare_public_keys:
 prepare_unused_services:
   - wpa_supplicant
 
+prepare_basic_packages:
+  - nfs-common
+  - ca-certificates
+  - parted
+
 prepare_additional_disk: false
+prepare_additional_disk_dev: /dev/sda
 prepare_additional_disks_force_format: false

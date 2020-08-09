@@ -170,7 +170,7 @@ fi
 
 #device_list="$(/usr/sbin/smartctl --scan-open | awk '/^\/dev/{print $1 "|" $3}')"
 # Workaround: smartctl -d stat --scan also work but return bad driver
-device_list="/dev/sda|sat"
+device_list="$(ls /dev/sd[a-z])"
 
 for device in ${device_list}; do
   disk="$(echo ${device} | cut -f1 -d'|')"

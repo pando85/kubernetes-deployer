@@ -13,6 +13,7 @@
 ## etcd documentation for more information.
 # etcd_quota_backend_bytes: "2G"
 
+prepare_additional_disks_force_format: true
 ### ETCD: disable peer client cert authentication.
 # This affects ETCD_PEER_CLIENT_CERT_AUTH variable
 # etcd_peer_client_auth: true

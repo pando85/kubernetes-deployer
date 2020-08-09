@@ -28,12 +28,12 @@ For example:
 Pfsense configuration:
 
 - Connect to DMZ `192.168.1.0/24`
-- Add DHCP server: range(30-99), but fix agent IPs before add to the cluster.
+- Add DHCP server: range(60-99), but fix agent IPs before add to the cluster.
 - Create lb for apiserver (used HaProxy: increase client and server timeouts to 600000) and DNS entry
 
 ## Setup Rock64
 
-Use playbook `playbooks/install/prepare.yml` to setup rock64.
+Use playbook `playbooks/install/prepare.yml` to setup servers.
 
 ## Cluster
 

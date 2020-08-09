@@ -2,3 +2,6 @@
 
 - name: update-ca-certificates
   command: update-ca-certificates
+
+- name: restart sshd
+  command: systemctl restart sshd

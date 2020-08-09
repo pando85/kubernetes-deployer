@@ -1,4 +1,15 @@
 ---
+- name: Add group agil
+  group:
+    name: agil
+    gid: 1000
+
+- name: Add user agil
+  user:
+    name: agil
+    uid: 1000
+    groups: sudo,agil
+    append: yes
 
 - name: Configure vim as default editor
   copy:
@@ -13,38 +24,32 @@
 
 - name: Set authorized keys
   authorized_key:
-    user: "{{ ansible_user }}"
+    user: agil
     state: present
     key: "{{ item }}"
   loop: "{{ prepare_public_keys }}"
 
+- name: Disable root login
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regex: "^(# *)?PermitRootLogin"
+    line: "PermitRootLogin no"
+  notify: restart sshd
+
 - name: Generate new machine-id
-  shell: rm /etc/machine-id && systemd-machine-id-setup && touch /etc/machine-id-new
+  shell: >
+    rm /etc/machine-id && dbus-uuidgen --ensure=/etc/machine-id &&
+    rm /var/lib/dbus/machine-id; dbus-uuidgen --ensure && touch /etc/machine-id-new
   args:
     creates: /etc/machine-id-new
   register: first_execution
-
-- name: Remove conflict systemd services
-  file:
-    path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-    state: absent
-
-- name: Remove conflict packages
-  apt:
-    name:
-      - kubelet
-      - kubeadm
-      - kubectl
-      - cri-tools
-      - kubernetes-cni
-    state: absent
 
 - name: First execution
   when: first_execution.changed
   block:
   - name: Change user password
     user:
-      name: "{{ ansible_user }}"
+      name: agil
       password: "{{ prepare_password }}"
       update_password: always
 
@@ -61,10 +66,11 @@
     enabled: false
     state: stopped
   loop: "{{ prepare_unused_services }}"
+  ignore_errors: true
 
-- name: Install nfs client
+- name: Install basic packages
   apt:
-    name: "nfs-common"
+    name: "{{ prepare_basic_packages }}"
     state: latest
     force_apt_get: true
     update_cache: true

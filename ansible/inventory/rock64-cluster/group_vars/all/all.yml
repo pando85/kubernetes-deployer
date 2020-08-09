@@ -1,5 +1,5 @@
 ---
-ansible_user: rock64
+ansible_user: agil
 
 ## Disable write IPs in /etc/hosts
 populate_inventory_to_hosts_file: false
