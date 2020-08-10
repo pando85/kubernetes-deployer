@@ -21,17 +21,17 @@
     - need_python.rc != 0
     - need_python3.rc == 0
 
-- name: Add group agil
+- name: Add group "{{ prepare_username }}"
   group:
-    name: agil
+    name: "{{ prepare_username }}"
     gid: 1000
 
-- name: Add user agil
+- name: Add user "{{ prepare_username }}"
   user:
-    name: agil
+    name: "{{ prepare_username }}"
     shell: /bin/bash
     uid: 1000
-    groups: sudo,agil
+    groups: sudo,"{{ prepare_username }}"
     append: yes
 
 - name: Configure vim as default editor
@@ -47,7 +47,7 @@
 
 - name: Set authorized keys
   authorized_key:
-    user: agil
+    user: "{{ prepare_username }}"
     state: present
     key: "{{ item }}"
   loop: "{{ prepare_public_keys }}"
@@ -72,7 +72,7 @@
   block:
   - name: Change user password
     user:
-      name: agil
+      name: "{{ prepare_username }}"
       password: "{{ prepare_password }}"
       update_password: always
 

@@ -1,5 +1,6 @@
 ---
-ansible_user: agil
+prepare_username: agil
+ansible_user: "{{ prepare_username }}"
 
 ## Disable write IPs in /etc/hosts
 populate_inventory_to_hosts_file: false
