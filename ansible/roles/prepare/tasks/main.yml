@@ -29,6 +29,7 @@
 - name: Add user agil
   user:
     name: agil
+    shell: /bin/bash
     uid: 1000
     groups: sudo,agil
     append: yes
