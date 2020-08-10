@@ -5,6 +5,7 @@
 - [Network](#network)
 - [Setup Rock64](#setup-rock64)
 - [Cluster](#cluster)
+- [Infra services](#infra-services)
 
 ## Flash SDs
 
@@ -42,3 +43,8 @@ Use playbook `playbooks/install/prepare.yml` to setup servers.
 ```bash
 ansible-playbook playbooks/install/cluster.yml --become
 ```
+
+## Infra services
+
+1. metallb
+1. dashboard

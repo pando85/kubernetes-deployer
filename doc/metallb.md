@@ -1,5 +1,16 @@
 # Metallb
 
+## Deployment
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
+# On first install only
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+```
+
+Reference: https://metallb.universe.tf/installation/
+
 ## Router config
 
 In order to use Metallb in BGP mode we must configure Pfsense as router to be able of share
