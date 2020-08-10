@@ -5,7 +5,7 @@
 - Create volume: `zfs create datasets/kubernetes`
 - Install `nfs-utils`
 - Enable and start `nfs-server`
-- Export to `192.168.1.0/24` network `zfs set sharenfs="rw=@192.168.1.0/24" datasets/kubernetes`
+- Export to `192.168.1.0/24` network `zfs set sharenfs="rw=@192.168.1.0/24,no_root_squash" datasets/kubernetes`
 
 ## Client
 
