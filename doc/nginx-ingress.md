@@ -6,6 +6,12 @@ Deployed to expose internal services.
 
 ### Deployment
 
+**TODO**: helm -> https://kubernetes.github.io/ingress-nginx/deploy/
+```bash
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+```
+
 Deployment
 
 ```yaml
