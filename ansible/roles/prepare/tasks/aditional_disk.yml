@@ -28,7 +28,7 @@
 
 - name: Create directories
   file:
-    src: "/mnt/{{ item | basename }}"
+    path: "/mnt/{{ item | basename }}"
     state: directory
   loop: "{{ prepare_additional_disk_directories }}"
 

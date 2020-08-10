@@ -37,4 +37,8 @@ Use playbook `playbooks/install/prepare.yml` to setup servers.
 
 ## Cluster
 
-`playbooks/install/cluster.yml` to setup Kubernetes
+`playbooks/install/cluster.yml` to setup Kubernetes.
+
+```bash
+ansible-playbook playbooks/install/cluster.yml --become
+```
