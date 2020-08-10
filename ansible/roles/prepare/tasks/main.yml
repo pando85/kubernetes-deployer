@@ -21,17 +21,17 @@
     - need_python.rc != 0
     - need_python3.rc == 0
 
-- name: Add group "{{ prepare_username }}"
+- name: "Add group {{ prepare_username }}"
   group:
     name: "{{ prepare_username }}"
     gid: 1000
 
-- name: Add user "{{ prepare_username }}"
+- name: "Add user {{ prepare_username }}"
   user:
     name: "{{ prepare_username }}"
     shell: /bin/bash
     uid: 1000
-    groups: sudo,"{{ prepare_username }}"
+    groups: "sudo,{{ prepare_username }}"
     append: yes
 
 - name: Configure vim as default editor
@@ -75,6 +75,7 @@
       name: "{{ prepare_username }}"
       password: "{{ prepare_password }}"
       update_password: always
+    when: prepare_password is defined
 
   - name: Upgrade all packages to the latest version
     apt:
