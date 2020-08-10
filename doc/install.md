@@ -47,4 +47,6 @@ ansible-playbook playbooks/install/cluster.yml --become
 ## Infra services
 
 1. metallb
-1. dashboard
+1. nginx-ingress
+1. cert-manager (problem with ServiceManager, not yet ready monitoring dependency)
+1. monitoring

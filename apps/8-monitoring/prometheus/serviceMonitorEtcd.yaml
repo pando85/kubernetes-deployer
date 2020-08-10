@@ -2,10 +2,10 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: kube-etcd
+  name: etcd
   namespace: monitoring
   labels:
-    app: kube-etcd
+    app: etcd
     prometheus: k8s
 spec:
   endpoints:
@@ -14,8 +14,8 @@ spec:
     scheme: https
     tlsConfig:
       caFile: /etc/prometheus/secrets/etcd-client/ca.pem
-      certFile: /etc/prometheus/secrets/etcd-client/node-k8s-1.pem
-      keyFile: /etc/prometheus/secrets/etcd-client/node-k8s-1-key.pem
+      certFile: /etc/prometheus/secrets/etcd-client/node-k8s-rock64-1.pem
+      keyFile: /etc/prometheus/secrets/etcd-client/node-k8s-rock64-1-key.pem
       serverName: etcd.kube-system.svc.kubernetes.grigri
   jobLabel: k8s-app
   namespaceSelector:
@@ -23,5 +23,5 @@ spec:
     - kube-system
   selector:
     matchLabels:
-     app: kube-etcd
+     app: etcd
 
