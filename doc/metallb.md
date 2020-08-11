@@ -27,34 +27,58 @@ BGP route table and route all network to that loadbalancer IPs. We use
   router-id 192.168.1.1
   network 192.168.2.0/24
 
+  neighbor 192.168.1.11 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-rock64-1"
+  }
+
+  neighbor 192.168.1.12 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-rock64-2"
+  }
+
+  neighbor 192.168.1.13 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-rock64-3"
+  }
+
+  neighbor 192.168.1.14 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-rock64-4"
+  }
+
+  neighbor 192.168.1.15 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-rock64-5"
+  }
+
+  neighbor 192.168.1.16 {
+  	remote-as 64513
+      announce all
+  	descr "k8s-rock64-6"
+  }
+
   neighbor 192.168.1.21 {
   	remote-as 64513
       announce all
-  	descr "k8s-1"
+  	descr "k8s-odroid-1"
   }
 
   neighbor 192.168.1.22 {
   	remote-as 64513
       announce all
-  	descr "k8s-2"
+  	descr "k8s-odroid-2"
   }
 
-  neighbor 192.168.1.23 {
+  neighbor 192.168.1.31 {
   	remote-as 64513
       announce all
-  	descr "k8s-3"
-  }
-
-  neighbor 192.168.1.24 {
-  	remote-as 64513
-      announce all
-  	descr "k8s-4"
-  }
-
-  neighbor 192.168.1.25 {
-  	remote-as 64513
-      announce all
-  	descr "k8s-5"
+  	descr "k8s-amd64-1"
   }
 
   neighbor 192.168.1.2 {
