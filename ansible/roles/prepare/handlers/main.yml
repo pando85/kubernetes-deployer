@@ -5,3 +5,6 @@
 
 - name: restart sshd
   command: systemctl restart sshd
+
+- name: restart server
+  reboot:

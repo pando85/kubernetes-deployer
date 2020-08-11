@@ -83,6 +83,7 @@
       state: latest
       force_apt_get: true
       update_cache: true
+    notify: restart server
 
 - name: Disable unused services
   systemd:
@@ -98,6 +99,15 @@
     state: latest
     force_apt_get: true
     update_cache: true
+
+- name: Disable swap in armbian
+  lineinfile:
+    path: /etc/default/armbian-zram-config
+    regex: "^ENABLED"
+    line: "ENABLED=false"
+  # armbian ansible_distribution is Ubuntu
+  ignore_errors: true
+  notify: restart server
 
 - name: Remove unused cron
   file:
@@ -117,6 +127,8 @@
 
 - name: "Additional storage"
   import_tasks: aditional_disk.yml
-  when: prepare_additional_disk
+  when:
+    - prepare_additional_disk
+    - first_execution.changed
   tags:
     - aditional-disk
