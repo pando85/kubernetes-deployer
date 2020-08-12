@@ -23,6 +23,7 @@ spec:
             backend:
               serviceName: rook-ceph-mgr-dashboard
               servicePort: 7000
+
   tls:
     - hosts:
       - ceph-dashboard.k8s.grigri

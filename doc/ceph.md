@@ -2,11 +2,23 @@
 
 ## Table of Contents <!-- omit in toc -->
 
+- [Reinstall](#reinstall)
 - [Troubleshooting](#troubleshooting)
   - [Luminous can't be used with KRBD with Linux 4.4](#luminous-cant-be-used-with-krbd-with-linux-44)
     - [Workaround:](#workaround)
     - [Bug fix:](#bug-fix)
   - [Random commands to see status inside toolbox](#random-commands-to-see-status-inside-toolbox)
+
+## Reinstall
+
+Delete cluster resource and all resources. Hint: iff cluster is still creating, restart operator.
+
+```bash
+# remove ceph info (monitor secrets, etc)
+rm -rf /var/lib/rook
+# clean disk partition table
+wipefs -af /dev/sd[whatever]
+```
 
 ## Troubleshooting
 
@@ -27,6 +39,7 @@ Update to kernel 4.5 or above
 ### Random commands to see status inside toolbox
 
 ```bash
+kubectl -n rook-ceph exec -it $(kubectl -n rook-ceph get pod | grep rook-ceph-tools | cut -d' ' -f1) -- bash
 rook status
 rados df
 ceph status

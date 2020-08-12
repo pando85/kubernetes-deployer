@@ -15,12 +15,12 @@ spec:
   metadataPool:
     failureDomain: host
     replicated:
-      size: 2
+      size: 3
   # The pool spec used to create the data pool. Can use replication or erasure coding.
   dataPool:
     failureDomain: host
     replicated:
-      size: 2
+      size: 3
   # Whether to preserve metadata and data pools on object store deletion
   preservePoolsOnDelete: false
   # The gateway service configuration
