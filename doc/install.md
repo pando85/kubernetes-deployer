@@ -30,7 +30,12 @@ Pfsense configuration:
 
 - Connect to DMZ `192.168.1.0/24`
 - Add DHCP server: range(60-99), but fix agent IPs before add to the cluster.
-- Create lb for apiserver (used HaProxy: increase client and server timeouts to 600000) and DNS entry
+- Create lb for apiserver (used HaProxy: increase client, server and tunnel* timeouts to 86400000)
+- Add DNS entry
+
+**tunnel\***: must be added in `backend->advanced settings->backend pass thru` as
+`timeout tunnel 86400s`
+
 
 ## Setup Rock64
 
