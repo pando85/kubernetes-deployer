@@ -1,30 +1,18 @@
-#################################################################################################################
-# Create a storage class with a data pool that uses erasure coding for a production environment.
-# A metadata pool is created with replication enabled. A minimum of 3 nodes with OSDs are required in this
-# example since the default failureDomain is host.
-#  kubectl create -f storageclass-ec.yaml
-#################################################################################################################
-
 apiVersion: ceph.rook.io/v1
 kind: CephBlockPool
 metadata:
-  name: replicated-metadata-pool
+  name: replicapool
   namespace: rook-ceph
 spec:
+  failureDomain: host
   replicated:
-    size: 2
----
-apiVersion: ceph.rook.io/v1
-kind: CephBlockPool
-metadata:
-  name: ec-data-pool
-  namespace: rook-ceph
-spec:
-  # Make sure you have enough nodes and OSDs running bluestore to support the replica size or erasure code chunks.
-  # For the below settings, you need at least 3 OSDs on different nodes (because the `failureDomain` is `host` by default).
-  erasureCoded:
-    dataChunks: 2
-    codingChunks: 1
+    size: 3
+    # Disallow setting pool with replica 1, this could lead to data loss without recovery.
+    # Make sure you're *ABSOLUTELY CERTAIN* that is what you want
+    requireSafeReplicaSize: true
+    # gives a hint (%) to Ceph in terms of expected consumption of the total cluster capacity of a given pool
+    # for more info: https://docs.ceph.com/docs/master/rados/operations/placement-groups/#specifying-expected-pool-size
+    targetSizeRatio: .5
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -42,8 +30,8 @@ parameters:
     # You need to specify the replicated pool here in the `pool` parameter, it is
     # used for the metadata of the images.
     # The erasure coded pool must be set as the `dataPool` parameter below.
-    dataPool: ec-data-pool
-    pool: replicated-metadata-pool
+    #dataPool: ec-data-pool
+    pool: replicapool
 
     # RBD image format. Defaults to "2".
     imageFormat: "2"
@@ -60,7 +48,8 @@ parameters:
     csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
     csi.storage.k8s.io/node-stage-secret-namespace: rook-ceph
     # Specify the filesystem type of the volume. If not specified, csi-provisioner
-    # will set default as `ext4`.
+    # will set default as `ext4`. Note that `xfs` is not recommended due to potential deadlock
+    # in hyperconverged settings where the volume is mounted on the same node as the osds.
     csi.storage.k8s.io/fstype: ext4
 # uncomment the following to use rbd-nbd as mounter on supported nodes
 # **IMPORTANT**: If you are using rbd-nbd as the mounter, during upgrade you will be hit a ceph-csi
