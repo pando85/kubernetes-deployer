@@ -14,7 +14,15 @@ spec:
       regex: etcd_(debugging|disk|request|server).*
       sourceLabels:
       - __name__
-    port: http-metrics
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      # Skip verification until we have resolved why the certificate validation
+      # for the kubelet on API server nodes fail.
+      insecureSkipVerify: true
+      serverName: localhost
+    bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    port: https-metrics
   jobLabel: k8s-app
   namespaceSelector:
     matchNames:
