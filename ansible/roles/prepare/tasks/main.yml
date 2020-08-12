@@ -119,8 +119,8 @@
     content: "{{ item.cert }}"
     dest: "/usr/local/share/ca-certificates/{{ item.name }}.crt"
   when:
-    - custom_cas is defined
-  loop: "{{ custom_cas }}"
+    - prepare_custom_cas is defined
+  loop: "{{ prepare_custom_cas }}"
   tags:
     - custom-cas
   notify: update-ca-certificates
