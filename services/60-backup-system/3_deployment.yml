@@ -17,6 +17,8 @@ spec:
         app: nfs-client-provisioner
     spec:
       serviceAccount: nfs-client-provisioner
+      nodeSelector:
+        kubernetes.io/arch: arm64
       containers:
         - name: nfs-client-provisioner
           image: quay.io/external_storage/nfs-client-provisioner-arm:latest
