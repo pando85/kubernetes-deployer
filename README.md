@@ -1,10 +1,12 @@
 # kubernetes-arm
 
-All neccesary code to deploy a new kubernetes cluster.
+All necessary code to deploy and operate Kubernetes clusters.
+It uses kubespray to k8s basic setup and it is focused in multi-arch bare-metal deployments.
 
 Contains:
-  - ansible: all operations automated with ansible
-  - apps: all services deployed in kubernetes manually, mainly with `kubectl`
+
+- ansible: all operations automated with ansible
+- apps: all services deployed in Kubernetes manually, mainly with `kubectl`
 
 ## Git Submodules
 

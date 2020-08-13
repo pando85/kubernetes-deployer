@@ -24,7 +24,7 @@ For one node failure, rook-operator can rebuild data.
 
 Based on [nfs docs](./nfs.md):
 - Create volume: `zfs create datasets/kubernetes-backup`
-- Export to `192.168.1.0/24` network `zfs set sharenfs="rw=@192.168.1.0/24" datasets/kubernetes-backup`
+- Export to `192.168.1.0/24` network `zfs set sharenfs="rw=@192.168.1.0/24,no_root_squash" datasets/kubernetes-backup`
 
 Add to `/etc/pyznap/pyznap.conf`:
 
