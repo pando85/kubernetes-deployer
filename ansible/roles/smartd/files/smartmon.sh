@@ -168,9 +168,7 @@ if [[ "$(expr "${smartctl_version}" : '\([0-9]*\)\..*')" -lt 6 ]]; then
   exit
 fi
 
-#device_list="$(/usr/sbin/smartctl --scan-open | awk '/^\/dev/{print $1 "|" $3}')"
-# Workaround: smartctl -d stat --scan also work but return bad driver
-device_list="$(ls /dev/sd[a-z])"
+device_list="$(/usr/sbin/smartctl --scan-open | awk '/^\/dev/{print $1 "|" $3}')"
 
 for device in ${device_list}; do
   disk="$(echo ${device} | cut -f1 -d'|')"
