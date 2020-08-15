@@ -22,10 +22,18 @@ spec:
       annotations:
         message: 'disk "{{ $labels.disk }}" in instance {{ $labels.instance }}: temperature {{ $value }}'
       expr: |
-        smartmon_temperature_celsius_raw_value > 37
+        smartmon_temperature_celsius_raw_value > 41
       for: 5m
       labels:
         severity: warning
+    - alert: diskHighTemperature
+      annotations:
+        message: 'disk "{{ $labels.disk }}" in instance {{ $labels.instance }}: temperature {{ $value }}'
+      expr: |
+        smartmon_temperature_celsius_raw_value > 51
+      for: 5m
+      labels:
+        severity: critical
     - alert: diskReadErrorRate
       annotations:
         message: 'disk "{{ $labels.disk }}" in instance {{ $labels.instance }} is going to fail'
