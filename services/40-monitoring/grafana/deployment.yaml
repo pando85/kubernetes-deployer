@@ -16,7 +16,7 @@ spec:
         app: grafana
     spec:
       containers:
-      - image: grafana/grafana:6.3.2
+      - image: grafana/grafana:7.1.3
         name: grafana
         ports:
         - containerPort: 3000
@@ -122,6 +122,9 @@ spec:
         - mountPath: /grafana-dashboard-definitions/0/cert-manager
           name: grafana-dashboard-cert-manager
           readOnly: false
+        - mountPath: /grafana-dashboard-definitions/0/logging-universal
+          name: grafana-dashboard-logging-universal
+          readOnly: false
         - mountPath: /etc/grafana
           name: grafana-config
           readOnly: false
@@ -222,6 +225,9 @@ spec:
       - configMap:
           name: grafana-dashboard-cert-manager
         name: grafana-dashboard-cert-manager
+      - configMap:
+          name: grafana-dashboard-logging-universal
+        name: grafana-dashboard-logging-universal
       - name: grafana-config
         secret:
           secretName: grafana-config

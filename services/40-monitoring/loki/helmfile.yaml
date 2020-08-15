@@ -1,0 +1,19 @@
+repositories:
+- name: loki
+  url: https://grafana.github.io/loki/charts
+releases:
+  - name: loki
+    namespace: monitoring
+    createNamespace: false
+    chart: loki/loki
+    version: 0.31.0
+    values:
+      - ./loki.yml
+
+  - name: promtail
+    namespace: monitoring
+    createNamespace: false
+    chart: loki/promtail
+    version: 0.24.0
+    values:
+      - ./promtail.yml

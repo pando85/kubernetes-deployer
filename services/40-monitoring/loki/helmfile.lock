@@ -1,0 +1,10 @@
+version: v0.125.5
+dependencies:
+- name: loki
+  repository: https://grafana.github.io/loki/charts
+  version: 0.31.0
+- name: promtail
+  repository: https://grafana.github.io/loki/charts
+  version: 0.24.0
+digest: sha256:7bc3bc85eeedcf511ee6837ba7ac27c0f3be8765b44164ad1fc042071af49909
+generated: "2020-08-15T18:38:34.786183379+02:00"

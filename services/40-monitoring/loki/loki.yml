@@ -1,0 +1,76 @@
+ingress:
+  # only needed for connection external promtail to the cluster
+  enabled: false
+  annotations:
+    certmanager.k8s.io/cluster-issuer: "internal"
+    kubernetes.io/ingress.class: "nginx-internal"
+    prometheus.io/probe: "true"
+  hosts:
+    - host: loki.k8s.grigri
+      paths:
+        - /
+  tls:
+    - secretName: loki-tls
+      hosts:
+        - loki.k8s.grigri
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app
+          operator: In
+          values:
+          - loki
+      topologyKey: "kubernetes.io/hostname"
+
+livenessProbe:
+  httpGet:
+    path: /ready
+    port: http-metrics
+  initialDelaySeconds: 120
+
+
+## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+## If you set enabled as "True", you need :
+## - create a pv which above 10Gi and has same namespace with loki
+## - keep storageClassName same with below setting
+persistence:
+  enabled: true
+  accessModes:
+  - ReadWriteOnce
+  size: 30Gi
+  storageClassName: rook-ceph-block
+
+rbac:
+  create: true
+  pspEnabled: true
+
+replicas: 2
+
+resources: {}
+# limits:
+#   cpu: 200m
+#   memory: 256Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+
+securityContext:
+  fsGroup: 10001
+  runAsGroup: 10001
+  runAsNonRoot: true
+  runAsUser: 10001
+
+service:
+  type: ClusterIP
+  nodePort:
+  port: 3100
+  annotations: {}
+  labels: {}
+
+serviceAccount:
+  create: true
+
+terminationGracePeriodSeconds: 4800

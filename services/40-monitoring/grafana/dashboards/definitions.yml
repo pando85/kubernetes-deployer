@@ -13115,7 +13115,7 @@ items:
                           "step": 240
                       },
                       {
-                          "expr": "rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])",
+                          "expr": "rate(container_network_transmit_bytes_total{id=\"/\"}[$__interval])",
                           "format": "time_series",
                           "hide": true,
                           "intervalFactor": 2,
@@ -13236,7 +13236,7 @@ items:
                           "step": 240
                       },
                       {
-                          "expr": "- rate(container_network_transmit_bytes_total{pod_name=~\".+\"}[$interval])",
+                          "expr": "- rate(container_network_transmit_bytes_total{pod_name=~\".+\"}[$__interval])",
                           "format": "time_series",
                           "hide": true,
                           "intervalFactor": 2,

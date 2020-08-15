@@ -212,7 +212,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(rate(container_last_seen{name=~\".+\"}[$interval]))",
+          "expr": "count(rate(container_last_seen{name=~\".+\"}[$__interval]))",
           "intervalFactor": 2,
           "refId": "A",
           "step": 1800
@@ -606,14 +606,14 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{id=\"/\"}[$interval])) by (id)",
+          "expr": "sum(rate(container_network_receive_bytes_total{id=\"/\"}[$__interval])) by (id)",
           "intervalFactor": 2,
           "legendFormat": "RECEIVED",
           "refId": "A",
           "step": 600
         },
         {
-          "expr": "- sum(rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])) by (id)",
+          "expr": "- sum(rate(container_network_transmit_bytes_total{id=\"/\"}[$__interval])) by (id)",
           "hide": false,
           "intervalFactor": 2,
           "legendFormat": "SENT",
@@ -731,7 +731,7 @@
           "step": 20
         },
         {
-          "expr": "sum(rate(process_cpu_seconds_total[$interval])) * 100",
+          "expr": "sum(rate(process_cpu_seconds_total[$__interval])) * 100",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1367,7 +1367,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "-sum(rate(node_disk_bytes_read[$interval])) by (device)",
+          "expr": "-sum(rate(node_disk_bytes_read[$__interval])) by (device)",
           "hide": false,
           "intervalFactor": 2,
           "legendFormat": "OUT on /{{device}}",
@@ -1376,7 +1376,7 @@
           "step": 600
         },
         {
-          "expr": "sum(rate(node_disk_bytes_written[$interval])) by (device)",
+          "expr": "sum(rate(node_disk_bytes_written[$__interval])) by (device)",
           "intervalFactor": 2,
           "legendFormat": "IN on /{{device}}",
           "metric": "",
@@ -1464,7 +1464,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(5, sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[$interval])) by (name) * 100)",
+          "expr": "topk(5, sum(rate(container_cpu_usage_seconds_total{name=~\".+\"}[$__interval])) by (name) * 100)",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -1654,7 +1654,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10, sum(rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])) by (name))",
+          "expr": "topk(10, sum(rate(container_network_transmit_bytes_total{name=~\".+\"}[$__interval])) by (name))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
@@ -1662,7 +1662,7 @@
           "step": 240
         },
         {
-          "expr": "rate(container_network_transmit_bytes_total{id=\"/\"}[$interval])",
+          "expr": "rate(container_network_transmit_bytes_total{id=\"/\"}[$__interval])",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
@@ -1752,7 +1752,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "topk(10, sum(rate(container_network_receive_bytes_total{name=~\".+\"}[$interval])) by (name))",
+          "expr": "topk(10, sum(rate(container_network_receive_bytes_total{name=~\".+\"}[$__interval])) by (name))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{name}}",
@@ -1760,7 +1760,7 @@
           "step": 240
         },
         {
-          "expr": "- rate(container_network_transmit_bytes_total{name=~\".+\"}[$interval])",
+          "expr": "- rate(container_network_transmit_bytes_total{name=~\".+\"}[$__interval])",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 2,
