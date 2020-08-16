@@ -34,7 +34,7 @@ spec:
             - name: ETCDCTL_API
               value: "3"
             command: ["/bin/sh"]
-            args: ["-c", "etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/ssl/etcd/ssl/ca.pem --cert=/etc/ssl/etcd/ssl/node-k8s-odroid-2.pem --key=/etc/ssl/etcd/ssl/node-k8s-odroid-2.pem snapshot save /backup/etcd-snapshot.db"]
+            args: ["-c", "etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/ssl/etcd/ssl/ca.pem --cert=/etc/ssl/etcd/ssl/node-k8s-odroid-2.pem --key=/etc/ssl/etcd/ssl/node-k8s-odroid-2-key.pem snapshot save /backup/etcd-snapshot.db"]
             volumeMounts:
             - mountPath: /etc/ssl/etcd/ssl/
               name: etcd-certs
