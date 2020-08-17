@@ -31,6 +31,12 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+        env:
+          - name: GF_INSTALL_PLUGINS
+            valueFrom:
+              secretKeyRef:
+                name: grafana-config
+                key: plugins
         volumeMounts:
         - mountPath: /var/lib/grafana
           name: grafana-persistent-storage
