@@ -17,7 +17,22 @@ Delete cluster resource and all resources. Hint: iff cluster is still creating, 
 # remove ceph info (monitor secrets, etc)
 rm -rf /var/lib/rook
 # clean disk partition table
-wipefs -af /dev/sd[whatever]
+wipefs -af /dev/sd{id}
+
+# ensure all lvm things are deleted
+lvs
+ls /dev/mapper/ceph-* | xargs -I% -- dmsetup remove %
+
+# if that didn't work:
+ls /dev/ceph-{lv_id}/osd-data-{vg_id}
+lvchange -an osd-data-{vg_id}
+lvremove -f /dev/ceph-{lv_id}/osd-data-{vg_id}
+vgchange -an /dev/ceph-{lv_id}
+vgremove -f /dev/ceph-{lv_id}
+dd if=/dev/zero of="/dev/sda" bs=1M count=100 oflag=direct,dsync
+
+# if there are old files under /dev/ceph-{lv_ide} clean then also
+rm -rf /dev/ceph-{old_lv_id}
 ```
 
 ## Troubleshooting
