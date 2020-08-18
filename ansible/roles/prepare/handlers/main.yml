@@ -8,3 +8,6 @@
 
 - name: restart server
   reboot:
+
+- name: update grub
+  command: update-grub

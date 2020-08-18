@@ -109,6 +109,16 @@
   ignore_errors: true
   notify: restart server
 
+- name: Disable swap usage per cgroups
+  lineinfile:
+    path: /etc/default/grub
+    regex: "^GRUB_CMDLINE_LINUX="
+    line: 'GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
+  ignore_errors: true
+  notify:
+    - update grub
+    - restart server
+
 - name: Remove unused cron
   file:
     state: absent
