@@ -1,56 +1,13 @@
 ---
+- name: Set python interpreter
+  import_tasks: python.yml
 
-- name: Check if python is needed
-  raw: which python
-  register: need_python
-  failed_when: false
-  changed_when: false
+- name: Create user and enable login
+  import_tasks: user.yml
 
-- name: Check if python3 is installed
-  raw: which python3
-  register: need_python3
-  failed_when: false
-  changed_when: false
-
-- name: Create a symbolic link
-  file:
-    src: "{{ need_python3.stdout_lines | first }}"
-    dest: /usr/bin/python
-    state: link
-  when:
-    - need_python.rc != 0
-    - need_python3.rc == 0
-
-- name: "Add group {{ prepare_username }}"
-  group:
-    name: "{{ prepare_username }}"
-    gid: 1000
-
-- name: "Add user {{ prepare_username }}"
-  user:
-    name: "{{ prepare_username }}"
-    shell: /bin/bash
-    uid: 1000
-    groups: "sudo,{{ prepare_username }}"
-    append: yes
-
-- name: Configure vim as default editor
-  copy:
-    content: "export EDITOR=vi"
-    dest: /etc/profile.d/editor.sh
-
-- name: Allow sudo without password
-  lineinfile:
-    path: /etc/sudoers
-    regexp: "^%sudo"
-    line: "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL"
-
-- name: Set authorized keys
-  authorized_key:
-    user: "{{ prepare_username }}"
-    state: present
-    key: "{{ item }}"
-  loop: "{{ prepare_public_keys }}"
+- name: Set hostname
+  hostname:
+    name: "{{ ansible_hostname }}"
 
 - name: Disable root login
   lineinfile:
@@ -107,6 +64,9 @@
     line: "ENABLED=false"
   # armbian ansible_distribution is Ubuntu
   ignore_errors: true
+  when:
+    - ansible_architecture == "aarch64"
+    - ansible_distribution == "Ubuntu"
   notify: restart server
 
 - name: Disable swap usage per cgroups
@@ -115,6 +75,7 @@
     regex: "^GRUB_CMDLINE_LINUX="
     line: 'GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
   ignore_errors: true
+  when: ansible_distribution == "Debian"
   notify:
     - update grub
     - restart server
@@ -135,7 +96,7 @@
     - custom-cas
   notify: update-ca-certificates
 
-- name: "Additional storage"
+- name: Additional storage
   import_tasks: aditional_disk.yml
   when:
     - prepare_additional_disk
