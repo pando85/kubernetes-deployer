@@ -80,6 +80,15 @@
     - update grub
     - restart server
 
+- name: Set max speed
+  lineinfile:
+    path: /etc/default/cpufrequtils
+    regex: "^MAX_SPEED="
+    line: 'MAX_SPEED={{ prepare_max_cpu_freq }}'
+  ignore_errors: true
+  when: prepare_max_cpu_freq is defined
+  notify: restart cpufrequtils
+
 - name: Remove unused cron
   file:
     state: absent

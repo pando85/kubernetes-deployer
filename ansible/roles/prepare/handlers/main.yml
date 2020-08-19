@@ -4,10 +4,17 @@
   command: update-ca-certificates
 
 - name: restart sshd
-  command: systemctl restart sshd
+  service:
+    name: sshd
+    state: restarted
 
 - name: restart server
   reboot:
 
 - name: update grub
   command: update-grub
+
+- name: restart cpufrequtils
+  service:
+    name: cpufrequtils
+    state: restarted
