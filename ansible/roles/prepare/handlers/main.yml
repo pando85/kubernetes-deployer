@@ -18,3 +18,9 @@
   service:
     name: cpufrequtils
     state: restarted
+
+- name: restart systemd-logind
+  systemd:
+    name: systemd-logind
+    daemon_reload: true
+    state: restarted

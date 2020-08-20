@@ -9,12 +9,8 @@
   hostname:
     name: "{{ ansible_hostname }}"
 
-- name: Disable root login
-  lineinfile:
-    path: /etc/ssh/sshd_config
-    regex: "^(# *)?PermitRootLogin"
-    line: "PermitRootLogin no"
-  notify: restart sshd
+- name: Set up sshd
+  import_tasks: sshd.yml
 
 - name: Generate new machine-id
   shell: >
