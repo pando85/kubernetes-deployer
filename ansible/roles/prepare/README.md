@@ -1,6 +1,6 @@
 # Prepare
 
-Role intended to setup rock64.
+Role intended to setup servers: login, packages, disks...
 
 ## Optional variables
 

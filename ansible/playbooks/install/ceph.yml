@@ -3,11 +3,6 @@
 - hosts: ceph
   become: true
   roles:
+    - ceph-dependencies
     - smartd
-  tasks:
-    - name: install lvm
-      apt:
-        name: lvm2
-        state: latest
-      tags:
-        - ceph-dependencies
+

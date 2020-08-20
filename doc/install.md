@@ -17,12 +17,16 @@ Use script from `scripts/prepare_sdcard.sh` to prepare instances.
 ### Naming convention
 
 All nodes must be named with prefix `k8s-{hardware_tag}-{numerical_id}`.
-
 For example:
 
 - k8s-rock64-3
 - k8s-odroid-1
 - k8s-atom-1
+
+Also, consider their use case and performance profile. For example, for Ceph nodes:
+
+- k8s-sas-ssd-1
+- k8s-hot-storage-2
 
 ## Network
 
