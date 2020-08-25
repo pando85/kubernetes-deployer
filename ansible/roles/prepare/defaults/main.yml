@@ -15,3 +15,6 @@ prepare_basic_packages:
 prepare_additional_disk: false
 prepare_additional_disk_dev: /dev/sda
 prepare_additional_disks_force_format: false
+
+prepare_domain: localdomain
+prepare_mtu: 1500

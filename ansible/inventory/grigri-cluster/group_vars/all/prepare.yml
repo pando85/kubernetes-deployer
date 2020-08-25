@@ -1,5 +1,7 @@
 ---
 prepare_username: agil
+prepare_domain: grigri
+prepare_mtu: 1500
 
 prepare_password: "{{ lookup('passwordstore', 'kubernetes.grigri/prepare_password')}}"
 prepare_public_keys:

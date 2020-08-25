@@ -24,3 +24,6 @@
     name: systemd-logind
     daemon_reload: true
     state: restarted
+
+- name: apply network interface
+  command: netplan apply

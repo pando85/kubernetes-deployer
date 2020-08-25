@@ -5,10 +5,6 @@
 - name: Create user and enable login
   import_tasks: user.yml
 
-- name: Set hostname
-  hostname:
-    name: "{{ ansible_hostname }}"
-
 - name: Set up sshd
   import_tasks: sshd.yml
 
@@ -108,3 +104,8 @@
     - first_execution.changed
   tags:
     - aditional-disk
+
+- name: Network configuration
+  import_tasks: network.yml
+  tags:
+    - network
