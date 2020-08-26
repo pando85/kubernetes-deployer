@@ -38,7 +38,7 @@ spec:
               memory: 64M
             requests:
               cpu: 10m
-              memory: 32M
+              memory: 64M
       volumes:
         - name: nfs-client-root
           nfs:

@@ -28,10 +28,10 @@ spec:
           name: https-main
         resources:
           limits:
-            memory: 40Mi
+            memory: 32Mi
           requests:
             cpu: 10m
-            memory: 20Mi
+            memory: 32Mi
       - args:
         - --logtostderr
         - --secure-listen-address=:9443
@@ -44,10 +44,10 @@ spec:
           name: https-self
         resources:
           limits:
-            memory: 40Mi
+            memory: 32Mi
           requests:
             cpu: 10m
-            memory: 20Mi
+            memory: 32Mi
       - args:
         - --host=127.0.0.1
         - --port=8081
@@ -57,10 +57,10 @@ spec:
         name: kube-state-metrics
         resources:
           limits:
-            memory: 150Mi
+            memory: 128Mi
           requests:
             cpu: 100m
-            memory: 150Mi
+            memory: 128Mi
       nodeSelector:
         kubernetes.io/os: linux
       securityContext:

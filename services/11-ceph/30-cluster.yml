@@ -181,20 +181,20 @@ spec:
       resources:
         limits:
           cpu: "3"
-          memory: "3072Mi"
+          memory: "1536Mi"
         requests:
           cpu: "1"
-          memory: "1024Mi"
+          memory: "1536Mi"
     - name: "k8s-odroid-2"
       devices:
       - name: "sdb"
       resources:
         limits:
           cpu: "3"
-          memory: "3072Mi"
+          memory: "1536Mi"
         requests:
           cpu: "1"
-          memory: "1024Mi"
+          memory: "1536Mi"
     - name: "k8s-amd64-1"
       deviceFilter: "^sd."
       # node is full capacity right now

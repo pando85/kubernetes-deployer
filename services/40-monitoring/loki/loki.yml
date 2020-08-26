@@ -49,13 +49,13 @@ rbac:
 
 replicas: 2
 
-resources: {}
-# limits:
-#   cpu: 200m
-#   memory: 256Mi
-# requests:
-#   cpu: 100m
-#   memory: 128Mi
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
 
 securityContext:
   fsGroup: 10001
