@@ -124,7 +124,7 @@ data:
           cpu: 10m
         limits:
           memory: 64Mi
-          cpu: 20m
+          cpu: 200m
     - name : csi-rbdplugin
       resource:
         requests:
@@ -132,7 +132,7 @@ data:
           cpu: 10m
         limits:
           memory: 64Mi
-          cpu: 200m
+          cpu: 500m
     - name : liveness-prometheus
       resource:
         requests:
