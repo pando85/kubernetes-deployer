@@ -100,7 +100,7 @@ data:
           cpu: 10m
         limits:
           memory: 64Mi
-          cpu: 40m
+          cpu: 200m
     - name : csi-resizer
       resource:
         requests:
