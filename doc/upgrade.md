@@ -8,6 +8,7 @@
   git pull
   # find next kubespray version, E.g.:
   # (if you're on v2.6.0, then check out v2.7.0, run the upgrade, check the next tag, and run the)
+  git tag
   git checkout {version}
   cd ..
   git add kubespray
