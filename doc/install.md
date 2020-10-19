@@ -44,6 +44,11 @@ Pfsense configuration:
 ## Setup Rock64
 
 Use playbook `playbooks/install/prepare.yml` to setup servers.
+```bash
+ansible-galaxy role install -r requirements.yml
+ssh root@{node} # Armbian default password 1234 and setup a new  password
+ansible-playbook playbooks/install/prepare.yml --ask-pass -e ansible_user=root
+```
 
 ## Cluster
 

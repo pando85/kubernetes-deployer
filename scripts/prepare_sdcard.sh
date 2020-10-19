@@ -24,5 +24,6 @@ fi
 mount /dev/mmcblk0p1 /mnt
 sed -i "s/$HOSTNAME/$K8S_HOSTNAME/g" /mnt/etc/hostname
 sed -i "s/$HOSTNAME/$K8S_HOSTNAME/g" /mnt/etc/hosts
+rm /mnt/root/.not_logged_in_yet
 rm /mnt/etc/profile.d/armbian-check-first-login.sh
 umount /mnt
