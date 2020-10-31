@@ -1,0 +1,37 @@
+---
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: center
+    url: https://repo.chartcenter.io
+
+environments:
+  default:
+    secrets:
+      - ./secrets.yaml
+
+
+releases:
+  - name: cert-manager
+    namespace: cert-manager
+    createNamespace: true
+    chart: jetstack/cert-manager
+    version: v1.1.0-alpha.1
+    hooks: []
+    # if installCRD == false then:
+    # - events: ["presync"]
+    #   showlogs: true
+    #   command: kubectl
+    #   args:
+    #     - apply
+    #     - -f
+    #     - "https://github.com/jetstack/cert-manager/releases/download/v1.1.0-alpha.1/cert-manager.crds.yaml"
+    values:
+      - ./values.yaml
+  - name: cert-manager-issuers
+    chart: center/incubator/raw
+    namespace: cert-manager
+    version: 0.2.3
+    disableValidation: true
+    values:
+      - ./issuer.yaml.gotmpl
