@@ -118,6 +118,16 @@
   tags:
     - aditional-disk
 
+- name: Modify kernel parameters
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    sysctl_file: /etc/sysctl.d/40-kubernetes-custom.conf
+    sysctl_set: true
+  loop: "{{ prepare_sysctl }}"
+  tags:
+    - sysctl
+
 - name: Network configuration
   import_tasks: network.yml
   tags:
