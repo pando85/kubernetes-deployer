@@ -1,33 +1,13 @@
 ---
 repositories:
-  - name: center
-    url: https://repo.chartcenter.io
-
-environments:
-  default:
-    secrets:
-      - ./secrets.yaml
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
 
 releases:
   - name: metallb
-    chart: center/incubator/raw
+    chart: bitnami/metallb
     namespace: metallb-system
-    version: 0.2.3
+    version: 0.1.28
     wait: true
-    hooks:
-    - events: ["presync"]
-      showlogs: true
-      command: kubectl
-      args:
-        - apply
-        - -f
-        - "https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/namespace.yaml"
-    - events: ["presync"]
-      showlogs: true
-      command: kubectl
-      args:
-        - apply
-        - -f
-        - "https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/metallb.yaml"
     values:
-      - ./values.yaml.gotmpl
+      - values.yaml

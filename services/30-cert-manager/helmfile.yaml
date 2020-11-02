@@ -17,6 +17,7 @@ releases:
     createNamespace: true
     chart: jetstack/cert-manager
     version: v1.1.0-alpha.1
+    wait: true
     hooks: []
     # if installCRD == false then:
     # - events: ["presync"]
@@ -33,5 +34,6 @@ releases:
     namespace: cert-manager
     version: 0.2.3
     disableValidation: true
+    wait: true
     values:
       - ./issuer.yaml.gotmpl
