@@ -1,0 +1,33 @@
+---
+repositories:
+  - name: center
+    url: https://repo.chartcenter.io
+
+environments:
+  default:
+    secrets:
+      - ./secrets.yaml
+
+releases:
+  - name: metallb
+    chart: center/incubator/raw
+    namespace: metallb-system
+    version: 0.2.3
+    wait: true
+    hooks:
+    - events: ["presync"]
+      showlogs: true
+      command: kubectl
+      args:
+        - apply
+        - -f
+        - "https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/namespace.yaml"
+    - events: ["presync"]
+      showlogs: true
+      command: kubectl
+      args:
+        - apply
+        - -f
+        - "https://raw.githubusercontent.com/metallb/metallb/v0.9.4/manifests/metallb.yaml"
+    values:
+      - ./values.yaml.gotmpl
