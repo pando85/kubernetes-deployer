@@ -1,8 +1,5 @@
 # see roles/network_plugin/calico/defaults/main.yml
 
-calico_policy_controller_cpu_limit: 600m
-calico_node_cpu_limit: 600m
-
 ## With calico it is possible to distributed routes with border routers of the datacenter.
 ## Warning : enabling router peering will disable calico's default behavior ('node mesh').
 ## The subnets of each nodes will be distributed by the datacenter router
@@ -26,7 +23,14 @@ calico_node_cpu_limit: 600m
 # You can set MTU value here. If left undefined or empty, it will
 # not be specified in calico CNI config, so Calico will use built-in
 # defaults. The value should be a number, not a string.
-calico_mtu: "{{ prepare_mtu }}"
+# calico_mtu: 1500
+
+# Configure the MTU to use for workload interfaces and tunnels.
+# - If Wireguard is enabled, set to your network MTU - 60
+# - Otherwise, if VXLAN or BPF mode is enabled, set to your network MTU - 50
+# - Otherwise, if IPIP is enabled, set to your network MTU - 20
+# - Otherwise, if not using any encapsulation, set to your network MTU.
+# calico_veth_mtu: 1440
 
 # Advertise Cluster IPs
 # calico_advertise_cluster_ips: true

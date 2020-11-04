@@ -1,10 +1,4 @@
 ---
-ansible_user: "{{ prepare_username }}"
-
-kubespray_version: v2.14.2
-## Disable write IPs in /etc/hosts
-populate_inventory_to_hosts_file: false
-
 ## Directory where etcd data stored
 etcd_data_dir: /var/lib/etcd
 
@@ -23,15 +17,15 @@ bin_dir: /usr/local/bin
 
 
 ## External LB example config
-apiserver_loadbalancer_domain_name: "kubernetes.grigri"
-loadbalancer_apiserver:
-  address: 192.168.1.10
-  port: 6443
+## apiserver_loadbalancer_domain_name: "elb.some.domain"
+# loadbalancer_apiserver:
+#   address: 1.2.3.4
+#   port: 1234
 
 ## Internal loadbalancers for apiservers
-loadbalancer_apiserver_localhost: false
+# loadbalancer_apiserver_localhost: true
 # valid options are "nginx" or "haproxy"
-# loadbalancer_apiserver_type: nginx # valid values "nginx" or "haproxy"
+# loadbalancer_apiserver_type: nginx  # valid values "nginx" or "haproxy"
 
 ## Local loadbalancer should use this port
 ## And must be set port 6443
@@ -43,11 +37,10 @@ loadbalancer_apiserver_healthcheck_port: 8081
 ### OTHER OPTIONAL VARIABLES
 
 ## Upstream dns servers
-upstream_dns_servers:
-  - 192.168.1.1
+# upstream_dns_servers:
+#   - 8.8.8.8
+#   - 8.8.4.4
 
-searchdomains:
-  - grigri
 ## There are some changes specific to the cloud providers
 ## for instance we need to encapsulate packets with some network plugins
 ## If set the possible values are either 'gce', 'aws', 'azure', 'openstack', 'vsphere', 'oci', or 'external'
@@ -55,10 +48,10 @@ searchdomains:
 ## like you would do when using openstack-client before starting the playbook.
 # cloud_provider:
 
-## If set the possible values are either 'gce', 'aws', 'azure', 'openstack', 'vsphere', 'oci', or 'external'
-## When openstack is used make sure to source in the openstack credentials
-## like you would do when using openstack-client before starting the playbook.
-# cloud_provider:
+## When cloud_provider is set to 'external', you can set the cloud controller to deploy
+## Supported cloud controllers are: 'openstack' and 'vsphere'
+## When openstack or vsphere are used make sure to source in the required fields
+# external_cloud_provider:
 
 ## Set these proxy values in order to update package manager and docker daemon to use proxies
 # http_proxy: ""
@@ -80,7 +73,7 @@ searchdomains:
 ## Chose 'none' if you provide your own certificates.
 ## Option is  "script", "none"
 ## note: vault is removed
-cert_management: script
+# cert_management: script
 
 ## Set to true to allow pre-checks to fail and continue deployment
 # ignore_assert_errors: false
@@ -93,7 +86,7 @@ cert_management: script
 
 ## Deploy container engine
 # Set false if you want to deploy container engine manually.
-deploy_container_engine: true
+# deploy_container_engine: true
 
 ## Set Pypi repo and cert accordingly
 # pyrepo_index: https://pypi.example.com/simple

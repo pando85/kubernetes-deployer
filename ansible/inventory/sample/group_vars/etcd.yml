@@ -20,26 +20,3 @@
 
 ## Settings for etcd deployment type
 etcd_deployment_type: docker
-
-# etcd_heartbeat_interval: "250"
-etcd_heartbeat_interval: "600"
-# etcd_election_timeout: "5000"
-etcd_election_timeout: "10000"
-
-# etcd_snapshot_count: "10000"
-etcd_snapshot_count: "5000"
-
-# Use system reserved to reserve etcd cpu and ram
-system_reserved: true
-## Needed for etcd3
-system_memory_reserved: 200M
-system_cpu_reserved: 500m
-## Needed for master hosts
-system_master_memory_reserved: 200M
-system_master_cpu_reserved: 500m
-
-
-prepare_additional_disk: true
-prepare_additional_disk_directories:
-  - /var/lib/etcd
-prepare_additional_disks_force_format: true
