@@ -3,6 +3,10 @@ repositories:
   - name: bitnami
     url: https://charts.bitnami.com/bitnami
 
+environments:
+  sample:
+  grigri-cluster:
+
 releases:
   - name: metallb
     chart: bitnami/metallb
@@ -10,4 +14,5 @@ releases:
     version: 0.1.28
     wait: true
     values:
-      - values.yaml
+      - ./values.yaml
+      - ./environments/{{ .Environment.Name }}/values.yaml
