@@ -1,4 +1,5 @@
 **/credentials
+inventory/*/artifacts/
 roles/geerlingguy.ntp
 kubespray
 vagrant/config.rb
