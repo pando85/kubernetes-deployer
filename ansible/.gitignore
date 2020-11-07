@@ -1,3 +1,6 @@
 **/credentials
 roles/geerlingguy.ntp
 kubespray
+vagrant/config.rb
+inventory/sample/vagrant_ansible_inventory
+.vagrant
