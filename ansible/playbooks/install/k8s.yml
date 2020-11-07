@@ -1,0 +1,18 @@
+---
+
+- hosts: all
+  any_errors_fatal: true
+  become: true
+  roles:
+    - geerlingguy.ntp
+
+- hosts: ceph
+  become: true
+  roles:
+    - ceph-dependencies
+    - smartd
+
+- import_playbook:  ../../playbooks/install/kubespray.yml
+
+- import_playbook: ../../kubespray/cluster.yml
+

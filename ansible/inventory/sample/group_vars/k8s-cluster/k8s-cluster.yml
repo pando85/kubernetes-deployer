@@ -69,6 +69,15 @@ kube_users:
 # kube_oidc_groups_claim: groups
 # kube_oidc_groups_prefix: oidc:
 
+## Variables to control webhook authn/authz
+# kube_webhook_token_auth: false
+# kube_webhook_token_auth_url: https://...
+# kube_webhook_token_auth_url_skip_tls_verify: false
+
+## For webhook authorization, authorization_modes must include Webhook
+# kube_webhook_authorization: false
+# kube_webhook_authorization_url: https://...
+# kube_webhook_authorization_url_skip_tls_verify: false
 
 # Choose network plugin (cilium, calico, contiv, weave or flannel. Use cni for generic cni plugin)
 # Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
@@ -103,7 +112,7 @@ kube_proxy_mode: ipvs
 
 # configure arp_ignore and arp_announce to avoid answering ARP queries from kube-ipvs0 interface
 # must be set to true for MetalLB to work
-kube_proxy_strict_arp: true
+kube_proxy_strict_arp: false
 
 # A string slice of values which specify the addresses to use for NodePorts.
 # Values may be valid IP blocks (e.g. 1.2.3.0/24, 1.2.3.4/32).
@@ -124,12 +133,11 @@ kube_proxy_nodeport_addresses: >-
 #   {%- endif -%}
 
 ## Encrypting Secret Data at Rest (experimental)
-kube_encrypt_secret_data: true
-kube_encrypt_token: "{{ lookup('passwordstore', 'kubernetes.grigri/kube_encrypt_token create=true') }}"
+kube_encrypt_secret_data: false
 
 # DNS configuration.
 # Kubernetes cluster name, also will be used as DNS domain
-cluster_name: kubernetes.grigri
+cluster_name: cluster.local
 # Subdomains of DNS domain to be resolved via /etc/resolv.conf for hostnet pods
 ndots: 2
 # Can be coredns, coredns_dual, manual or none
@@ -172,6 +180,9 @@ dns_domain: "{{ cluster_name }}"
 ## docker for docker, crio for cri-o and containerd for containerd.
 container_manager: docker
 
+# Additional container runtimes
+kata_containers_enabled: false
+
 ## Settings for containerd runtimes (only used when container_manager is set to containerd)
 #
 # Settings for default containerd runtime
@@ -204,8 +215,7 @@ helm_deployment_type: host
 
 # Enable kubeadm experimental control plane
 kubeadm_control_plane: false
-
-kubeadm_certificate_key: "{{ lookup('passwordstore', 'kubernetes.grigri/kubeadm_certificate_key create=true') | lower }}"
+kubeadm_certificate_key: "{{ lookup('password', credentials_dir + '/kubeadm_certificate_key.creds length=64 chars=hexdigits') | lower }}"
 
 # K8s image pull policy (imagePullPolicy)
 k8s_image_pull_policy: IfNotPresent

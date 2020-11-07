@@ -69,6 +69,15 @@ kube_users:
 # kube_oidc_groups_claim: groups
 # kube_oidc_groups_prefix: oidc:
 
+## Variables to control webhook authn/authz
+# kube_webhook_token_auth: false
+# kube_webhook_token_auth_url: https://...
+# kube_webhook_token_auth_url_skip_tls_verify: false
+
+## For webhook authorization, authorization_modes must include Webhook
+# kube_webhook_authorization: false
+# kube_webhook_authorization_url: https://...
+# kube_webhook_authorization_url_skip_tls_verify: false
 
 # Choose network plugin (cilium, calico, contiv, weave or flannel. Use cni for generic cni plugin)
 # Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
@@ -171,6 +180,9 @@ dns_domain: "{{ cluster_name }}"
 ## Container runtime
 ## docker for docker, crio for cri-o and containerd for containerd.
 container_manager: docker
+
+# Additional container runtimes
+kata_containers_enabled: false
 
 ## Settings for containerd runtimes (only used when container_manager is set to containerd)
 #

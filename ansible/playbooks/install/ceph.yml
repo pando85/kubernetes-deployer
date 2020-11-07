@@ -1,8 +1,0 @@
----
-
-- hosts: ceph
-  become: true
-  roles:
-    - ceph-dependencies
-    - smartd
-

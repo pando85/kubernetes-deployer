@@ -1,10 +1,4 @@
 ---
-ansible_user: "{{ prepare_username }}"
-
-kubespray_version: v2.14.2
-## Disable write IPs in /etc/hosts
-populate_inventory_to_hosts_file: false
-
 ## Directory where etcd data stored
 etcd_data_dir: /var/lib/etcd
 
