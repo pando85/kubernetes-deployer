@@ -1,0 +1,11 @@
+---
+- hosts: ceph
+  become: true
+  roles:
+    - storage/dependencies
+    - smartd
+
+- hosts: localhost
+  become: false
+  roles:
+    - storage/ceph

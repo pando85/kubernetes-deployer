@@ -4,7 +4,7 @@
     name: ceph
     gid: "{{ ceph_dependencies_gid }}"
   tags:
-    - ceph-dependencies
+    - storage/dependencies
 
 - name: Create ceph user
   user:
@@ -16,14 +16,14 @@
     createhome: false
     system: true
   tags:
-    - ceph-dependencies
+    - storage/dependencies
 
 - name: Increase file descriptors
   copy:
     content: 'ceph       soft    nproc     unlimited'
     dest: /etc/security/limits.d/50-ceph.conf
   tags:
-    - ceph-dependencies
+    - storage/dependencies
 
 - name: Adjust PID count for hosts with high number of OSDs
   sysctl:
@@ -32,11 +32,11 @@
     sysctl_file: /etc/sysctl.d/99-z_ceph.conf
     sysctl_set: yes
   tags:
-    - ceph-dependencies
+    - storage/dependencies
 
 - name: install lvm
   apt:
     name: lvm2
     state: latest
   tags:
-    - ceph-dependencies
+    - storage/dependencies

@@ -205,6 +205,11 @@ Vagrant.configure("2") do |config|
           if File.exist?($ansible_inventory_path)
             ansible.inventory_path = $ansible_inventory_path
           end
+          $kube_config = File.join(
+            File.dirname(__FILE__),
+            "/.vagrant/provisioners/ansible/inventory/artifacts/admin.conf"
+          )
+          ENV["KUBECONFIG"] = $kube_config
           ansible.become = true
           ansible.galaxy_role_file = "requirements.yml"
           ansible.galaxy_roles_path = "roles"
