@@ -5,7 +5,7 @@
     - storage/dependencies
     - smartd
 
-- hosts: localhost
-  become: false
+- hosts: kube-master[0]
+  become: true
   roles:
     - storage/ceph

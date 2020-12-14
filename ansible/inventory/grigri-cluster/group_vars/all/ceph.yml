@@ -3,18 +3,12 @@ ceph_nodes:
   - name: "k8s-odroid-1"
     deviceFilter: "^sd."
     resources:
-      limits:
-        cpu: "3"
-        memory: "1536Mi"
       requests:
         cpu: "1"
         memory: "1536Mi"
   - name: "k8s-odroid-2"
     deviceFilter: "^sd."
     resources:
-      limits:
-        cpu: "3"
-        memory: "1536Mi"
       requests:
         cpu: "1"
         memory: "1536Mi"

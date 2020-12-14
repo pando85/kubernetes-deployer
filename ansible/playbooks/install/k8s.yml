@@ -10,4 +10,6 @@
 
 - import_playbook: ../../kubespray/cluster.yml
 
+- import_playbook:  ../../playbooks/install/manage-k8s-dependencies.yml
+
 - import_playbook:  ../../playbooks/install/storage.yml

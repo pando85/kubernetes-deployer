@@ -1,0 +1,58 @@
+---
+
+# all
+apiserver_loadbalancer_domain_name: "k8s-1.{{ cluster_name }}"
+loadbalancer_apiserver:
+loadbalancer_apiserver_localhost: true
+
+cluster_name: vagrant.local
+credentials_dir: "{{ inventory_dir }}/credentials_vagrant"
+artifacts_dir: "{{ inventory_dir }}/artifacts_vagrant"
+
+# k8s-cluster
+kube_encrypt_token: "UF8vAMMD2oh0YxMl5bz5W3JrSKgR715n"
+kubeadm_certificate_key: "cb4AccAf50bAfe2Dfe4EFcaB3B7E1abbB0C035adCEFE649fd1Cc3Cc3c3Eef858"
+kubeconfig_localhost: True
+kubectl_localhost: False
+
+# dns
+populate_inventory_to_hosts_file: true
+
+# ceph
+ceph_nodes:
+  - name: "k8s-1"
+    deviceFilter: "^vd."
+    resources:
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+      requests:
+        cpu: "1"
+        memory: "1Gi"
+  - name: "k8s-2"
+    deviceFilter: "^vd."
+    resources:
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+      requests:
+        cpu: "1"
+        memory: "1Gi"
+  - name: "k8s-3"
+    deviceFilter: "^vd."
+    resources:
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+      requests:
+        cpu: "1"
+        memory: "1Gi"
+  - name: "k8s-4"
+    deviceFilter: "^vd."
+    resources:
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+      requests:
+        cpu: "1"
+        memory: "1Gi"
