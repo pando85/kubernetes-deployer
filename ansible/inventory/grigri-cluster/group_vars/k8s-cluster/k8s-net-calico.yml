@@ -56,7 +56,7 @@ calico_mtu: "{{ prepare_mtu }}"
 
 # IP in IP and VXLAN is mutualy exclusive modes.
 # set IP in IP encapsulation mode: "Always", "CrossSubnet", "Never"
-# calico_ipip_mode: 'Always'
+calico_ipip_mode: 'CrossSubnet'
 
 # set VXLAN encapsulation mode: "Always", "CrossSubnet", "Never"
 # calico_vxlan_mode: 'Never'
