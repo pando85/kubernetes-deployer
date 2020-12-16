@@ -1,0 +1,7 @@
+---
+kube_master_memory_reserved: 512M
+kube_master_cpu_reserved: 200m
+
+system_reserved: true
+system_cpu_reserved: 200m
+system_master_memory_reserved: 200M

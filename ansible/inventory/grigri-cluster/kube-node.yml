@@ -1,0 +1,5 @@
+---
+kube_cpu_reserved: 40m
+kube_memory_reserved: 128M
+
+system_reserved: false
