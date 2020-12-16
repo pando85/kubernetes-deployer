@@ -1,0 +1,14 @@
+---
+- name: install metallb
+  community.kubernetes.helm:
+    chart_repo_url: https://repo.chartcenter.io
+    chart_ref: bitnami/metallb
+    chart_version: v1.0.2
+    name: metallb
+    namespace: metallb-system
+    create_namespace: yes
+    wait: yes
+    values: "{{ lookup('template', 'values.yml.j2') | from_yaml }}"
+  tags:
+    - load-balancer
+    - metallb

@@ -48,3 +48,10 @@ ceph_nodes:
       requests:
         cpu: "1"
         memory: "1Gi"
+
+metallb_config:
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 172.31.1.220-172.31.1.250
