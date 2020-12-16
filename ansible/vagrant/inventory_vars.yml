@@ -22,28 +22,28 @@ populate_inventory_to_hosts_file: true
 ceph_nodes:
   - name: "k8s-1"
     devices:
-      - name: "vdb"
+      - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
       requests:
         cpu: "1"
         memory: "1Gi"
   - name: "k8s-2"
     devices:
-      - name: "vdb"
+      - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
       requests:
         cpu: "1"
         memory: "1Gi"
   - name: "k8s-3"
     devices:
-      - name: "vdb"
+      - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
       requests:
         cpu: "1"
         memory: "1Gi"
   - name: "k8s-4"
     devices:
-      - name: "vdb"
+      - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
       requests:
         cpu: "1"
