@@ -1,19 +1,23 @@
 ---
 ceph_nodes:
   - name: "k8s-odroid-1"
-    deviceFilter: "^sd."
+    devices:
+      - name: "/dev/disk/by-id/usb-JMicron_Tech_74D7337B463E330-0:0"
     resources:
       requests:
         cpu: "1"
         memory: "1536Mi"
   - name: "k8s-odroid-2"
-    deviceFilter: "^sd."
+    devices:
+      - name: "/dev/disk/by-id/usb-JMicron_Tech_9895B0426197-0:0"
     resources:
       requests:
         cpu: "1"
         memory: "1536Mi"
   - name: "k8s-amd64-1"
-    deviceFilter: "^sd."
+    devices:
+      - name: "/dev/disk/by-id/ata-WDC_WD30EZRX-00DC0B0_WD-WMC1T2457392"
+      - name: "/dev/disk/by-id/ata-WDC_WD30EZRX-00DC0B0_WD-WMC1T2292099"
     # node is full capacity right now
     #resources:
     #  limits:

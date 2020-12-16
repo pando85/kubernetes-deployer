@@ -21,25 +21,29 @@ populate_inventory_to_hosts_file: true
 # ceph
 ceph_nodes:
   - name: "k8s-1"
-    deviceFilter: "^vd."
+    devices:
+      - name: "vdb"
     resources:
       requests:
         cpu: "1"
         memory: "1Gi"
   - name: "k8s-2"
-    deviceFilter: "^vd."
+    devices:
+      - name: "vdb"
     resources:
       requests:
         cpu: "1"
         memory: "1Gi"
   - name: "k8s-3"
-    deviceFilter: "^vd."
+    devices:
+      - name: "vdb"
     resources:
       requests:
         cpu: "1"
         memory: "1Gi"
   - name: "k8s-4"
-    deviceFilter: "^vd."
+    devices:
+      - name: "vdb"
     resources:
       requests:
         cpu: "1"
