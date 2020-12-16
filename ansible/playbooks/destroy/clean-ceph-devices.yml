@@ -2,6 +2,8 @@
 
 - hosts:
   - ceph
+  #k8s nodes still can have monitors runnig if not node affinity defined
+  - k8s-cluster
   become: true
   gather_facts: true
   vars_prompt:
