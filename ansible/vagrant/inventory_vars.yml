@@ -24,6 +24,9 @@ ceph_nodes:
     devices:
       - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
+      limits:
+        cpu: "3"
+        memory: "3Gi"
       requests:
         cpu: "1"
         memory: "1Gi"
@@ -31,6 +34,9 @@ ceph_nodes:
     devices:
       - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
+      limits:
+        cpu: "3"
+        memory: "3Gi"
       requests:
         cpu: "1"
         memory: "1Gi"
@@ -38,6 +44,9 @@ ceph_nodes:
     devices:
       - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
+      limits:
+        cpu: "3"
+        memory: "3Gi"
       requests:
         cpu: "1"
         memory: "1Gi"
@@ -45,6 +54,9 @@ ceph_nodes:
     devices:
       - name: "/dev/disk/by-path/pci-0000:00:04.0"
     resources:
+      limits:
+        cpu: "3"
+        memory: "3Gi"
       requests:
         cpu: "1"
         memory: "1Gi"
