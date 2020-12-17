@@ -155,23 +155,35 @@
       mgr:
         limits:
           cpu: "500m"
-          memory: "1024Mi"
+          memory: "512Mi"
         requests:
           cpu: "500m"
-          memory: "1024Mi"
+          memory: "512Mi"
       mon:
+        limits:
+          cpu: "2"
+          memory: "2Gi"
         requests:
           cpu: "500m"
           memory: "1024Mi"
       osd:
+        limits:
+          cpu: "2"
+          memory: "3Gi"
         requests:
           cpu: "1"
           memory: "1536Mi"
       prepareosd:
+        limits:
+          cpu: "500m"
+          memory: "256Mi"
         requests:
           cpu: "20m"
           memory: "50Mi"
       crashcollector:
+        limits:
+          cpu: "500m"
+          memory: "256Mi"
         requests:
           cpu: "20m"
           memory: "60Mi"

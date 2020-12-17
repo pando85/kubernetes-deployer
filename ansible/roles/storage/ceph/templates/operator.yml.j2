@@ -1,4 +1,12 @@
 ---
+resources:
+  limits:
+    cpu: 500m
+    memory: 256Mi
+  requests:
+    cpu: 40m
+    memory: 128Mi
+
 csi:
   csiRBDProvisionerResource: |
    - name : csi-provisioner
@@ -49,31 +57,31 @@ csi:
        limits:
          memory: 128Mi
          cpu: 25m
-  # csiRBDPluginResource: |
-  #  - name : driver-registrar
-  #    resource:
-  #      requests:
-  #        memory: 128Mi
-  #        cpu: 50m
-  #      limits:
-  #        memory: 256Mi
-  #        cpu: 100m
-  #  - name : csi-rbdplugin
-  #    resource:
-  #      requests:
-  #        memory: 512Mi
-  #        cpu: 250m
-  #      limits:
-  #        memory: 1Gi
-  #        cpu: 500m
-  #  - name : liveness-prometheus
-  #    resource:
-  #      requests:
-  #        memory: 128Mi
-  #        cpu: 50m
-  #      limits:
-  #        memory: 256Mi
-  #        cpu: 100m
+  csiRBDPluginResource: |
+   - name : driver-registrar
+     resource:
+       requests:
+         memory: 32Mi
+         cpu: 5m
+       limits:
+         memory: 256Mi
+         cpu: 100m
+   - name : csi-rbdplugin
+     resource:
+       requests:
+         memory: 64Mi
+         cpu: 20m
+       limits:
+         memory: 1Gi
+         cpu: 500m
+   - name : liveness-prometheus
+     resource:
+       requests:
+         memory: 32Mi
+         cpu: 5m
+       limits:
+         memory: 256Mi
+         cpu: 100m
   csiCephFSProvisionerResource: |
    - name : csi-provisioner
      resource:
@@ -115,31 +123,31 @@ csi:
        limits:
          memory: 128Mi
          cpu: 25m
-  # csiCephFSPluginResource: |
-  #  - name : driver-registrar
-  #    resource:
-  #      requests:
-  #        memory: 128Mi
-  #        cpu: 50m
-  #      limits:
-  #        memory: 256Mi
-  #        cpu: 100m
-  #  - name : csi-cephfsplugin
-  #    resource:
-  #      requests:
-  #        memory: 512Mi
-  #        cpu: 250m
-  #      limits:
-  #        memory: 1Gi
-  #        cpu: 500m
-  #  - name : liveness-prometheus
-  #    resource:
-  #      requests:
-  #        memory: 128Mi
-  #        cpu: 50m
-  #      limits:
-  #        memory: 256Mi
-  #        cpu: 100m
+  csiCephFSPluginResource: |
+   - name : driver-registrar
+     resource:
+       requests:
+         memory: 32Mi
+         cpu: 5m
+       limits:
+         memory: 256Mi
+         cpu: 100m
+   - name : csi-cephfsplugin
+     resource:
+       requests:
+         memory: 64Mi
+         cpu: 20m
+       limits:
+         memory: 1Gi
+         cpu: 500m
+   - name : liveness-prometheus
+     resource:
+       requests:
+         memory: 32Mi
+         cpu: 5m
+       limits:
+         memory: 256Mi
+         cpu: 100m
 
 enableSelinuxRelabeling: false
 
