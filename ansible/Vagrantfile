@@ -36,7 +36,7 @@ $subnet ||= "172.31.1"
 $os ||= "ubuntu2004"
 $network_plugin ||= "calico"
 # The first three nodes are etcd servers
-$etcd_instances ||= $num_instances > 3 ? 3 : $num_instances
+$etcd_instances ||= $num_instances >= 3 ? 3 : 1
 # The first two nodes are kube masters
 $kube_master_instances ||= $num_instances == 1 ? $num_instances : ($num_instances - 1)
 # All nodes are kube nodes
