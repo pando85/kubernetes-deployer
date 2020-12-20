@@ -42,13 +42,6 @@
   loop: "{{ prepare_unused_services }}"
   ignore_errors: true
 
-- name: "Fix source list odroid: https://forum.odroid.com/viewtopic.php?p=304245#p304245"
-  lineinfile:
-    path: /etc/apt/sources.list.d/odroid.list
-    regex: "^deb http://deb.odroid.in/c4/"
-    line: 'deb http://deb.odroid.in/c4/ focal main'
-  ignore_errors: true
-
 - name: Remove first login file from armbian
   file:
     path: /root/.not_logged_in_yet

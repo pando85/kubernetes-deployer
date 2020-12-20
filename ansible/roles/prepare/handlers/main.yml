@@ -8,9 +8,6 @@
     name: sshd
     state: restarted
 
-- name: restart server
-  reboot:
-
 - name: update grub
   command: update-grub
 
@@ -27,3 +24,6 @@
 
 - name: apply network interface
   command: netplan apply
+
+- name: restart server
+  reboot:
