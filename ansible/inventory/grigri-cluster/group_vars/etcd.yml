@@ -33,3 +33,4 @@ prepare_additional_disk: true
 prepare_additional_disk_directories:
   - /var/lib/etcd
 prepare_additional_disks_force_format: true
+prepare_additional_disk_dev: /dev/sda
