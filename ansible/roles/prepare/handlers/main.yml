@@ -26,4 +26,6 @@
   command: netplan apply
 
 - name: restart server
+  vars:
+    ansible_user: "{{ prepare_username }}"
   reboot:
