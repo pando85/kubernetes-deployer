@@ -2,7 +2,6 @@
 inventory/*/artifacts/
 roles/geerlingguy.ntp
 roles/geerlingguy.helm
-kubespray
 vagrant/config.rb
 inventory/grigri-cluster/vagrant_ansible_inventory
 inventory/grigri-cluster/artifacts_vagrant

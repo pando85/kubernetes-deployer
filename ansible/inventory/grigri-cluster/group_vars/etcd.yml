@@ -20,6 +20,8 @@
 
 ## Settings for etcd deployment type
 etcd_deployment_type: host
+etcd_image_repo: "{{ kube_image_repo }}/etcd"
+etcd_image_tag: "{{ etcd_version.lstrip('v') }}-0"
 
 # etcd_heartbeat_interval: "250"
 etcd_heartbeat_interval: "600"
