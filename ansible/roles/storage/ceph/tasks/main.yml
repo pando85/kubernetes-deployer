@@ -14,8 +14,17 @@
     - ceph
     - ceph-storage-class
 
-- import_tasks: object_s3.yml
+- import_tasks: object_class.yml
   tags:
     - ceph
-    - ceph-object-s3
+    - ceph-object-class
 
+- import_tasks: snapshot_controller.yml
+  tags:
+    - ceph
+    - snapshot-controller
+
+- import_tasks: toolbox.yml
+  tags:
+    - ceph
+    - ceph-toolbox

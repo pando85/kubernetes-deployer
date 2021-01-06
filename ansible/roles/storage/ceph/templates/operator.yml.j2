@@ -53,10 +53,10 @@ csi:
      resource:
        requests:
          memory: 32Mi
-         cpu: 50m
+         cpu: 25m
        limits:
          memory: 128Mi
-         cpu: 25m
+         cpu: 100m
   csiRBDPluginResource: |
    - name : driver-registrar
      resource:
@@ -119,10 +119,10 @@ csi:
      resource:
        requests:
          memory: 32Mi
-         cpu: 50m
+         cpu: 25m
        limits:
          memory: 128Mi
-         cpu: 25m
+         cpu: 100m
   csiCephFSPluginResource: |
    - name : driver-registrar
      resource:

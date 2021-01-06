@@ -1,0 +1,19 @@
+---
+- name: create snapshot controller CRD
+  community.kubernetes.k8s:
+    definition: "{{ lookup('file', item) | from_yaml }}"
+    wait: true
+    wait_condition:
+      type: Established
+      status: True
+  loop: "{{ lookup('fileglob', 'files/snapshot-controller/crd/*', wantlist=True) }}"
+
+- name: deploy snapshot controller
+  community.kubernetes.k8s:
+    definition: "{{ lookup('file', item) | from_yaml_all | list }}"
+  loop: "{{ lookup('fileglob', 'files/snapshot-controller/*.yaml', wantlist=True) | sort }}"
+
+- name: create snapshotclass
+  community.kubernetes.k8s:
+    definition: "{{ lookup('file', 'snapshotclass.yaml') | from_yaml }}"
+
