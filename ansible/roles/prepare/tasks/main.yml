@@ -66,6 +66,11 @@
     force_apt_get: true
     update_cache: true
 
+- name: Remove unnecesary packages
+  apt:
+    name: "{{ prepare_unnecesary_packages }}"
+    state: absent
+
 - name: Disable swap in armbian
   lineinfile:
     path: /etc/default/armbian-zram-config
