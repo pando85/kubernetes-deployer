@@ -1,5 +1,11 @@
 # see roles/network_plugin/calico/defaults/main.yml
 
+# Arm incompatible images since 3.15.3:
+# https://github.com/projectcalico/calico/issues/4256
+calico_node_image_repo: "{{ docker_image_repo }}/calico/node"
+calico_cni_image_repo: "{{ docker_image_repo }}/calico/cni"
+calico_policy_image_repo: "{{ docker_image_repo }}/calico/kube-controllers"
+
 calico_policy_controller_cpu_limit: 600m
 calico_node_cpu_limit: 600m
 
