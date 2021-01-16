@@ -15,6 +15,10 @@ kubeadm_certificate_key: "cb4AccAf50bAfe2Dfe4EFcaB3B7E1abbB0C035adCEFE649fd1Cc3C
 kubeconfig_localhost: True
 kubectl_localhost: False
 
+calico_mtu: 1500
+calico_veth_mtu: 1480
+calico_ipip_mode: Always
+
 # dns
 populate_inventory_to_hosts_file: true
 
