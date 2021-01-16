@@ -1,6 +1,6 @@
 ---
 ceph_nodes:
-  - name: "k8s-odroid-1"
+  - name: "k8s-odroid-c4-1"
     devices:
       - name: "/dev/disk/by-id/usb-JMicron_Tech_74D7337B463E330-0:0"
     resources:
@@ -10,7 +10,7 @@ ceph_nodes:
       requests:
         cpu: "1"
         memory: "1536Mi"
-  - name: "k8s-odroid-2"
+  - name: "k8s-odroid-c4-2"
     devices:
       - name: "/dev/disk/by-id/usb-JMicron_Tech_9895B0426197-0:0"
     resources:
