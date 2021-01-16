@@ -5,9 +5,11 @@
 - [Servers](#servers)
   - [Flash SDs](#flash-sds)
     - [Naming convention](#naming-convention)
-  - [Troubleshooting same mac problem](#troubleshooting-same-mac-problem)
+  - [Troubleshooting](#troubleshooting)
+    - [Same mac problem](#same-mac-problem)
+    - [No python interpreter found](#no-python-interpreter-found)
   - [Setup](#setup)
-  - [Stability problems](#stability-problems)
+  - [Stability problems (currently included 400MHz)](#stability-problems-currently-included-400mhz)
 - [Cluster](#cluster)
 - [Ansible installed services](#ansible-installed-services)
 
@@ -48,7 +50,9 @@ Also, consider their use case and performance profile. For example, for Ceph nod
 - k8s-hot-storage-2
 
 
-### Troubleshooting same mac problem
+### Troubleshooting
+
+#### Same mac problem
 
 Editing `/boot/ArmbianEnv.txt` didn't work.
 
@@ -58,6 +62,12 @@ Editing `/boot/ArmbianEnv.txt` didn't work.
 auto eth0
 iface eth0 inet dhcp
   hwaddress ether b6:09:a4:06:00:8b
+```
+
+#### No python interpreter found
+
+```bash
+ln -s /usr/bin/python3 /usr/bin/python
 ```
 
 ### Setup
@@ -71,20 +81,36 @@ ansible-playbook playbooks/install/so.yml -e 'serial=100%' --ask-pass -e ansible
 ansible-playbook playbooks/install/so.yml -e 'serial=100%' --limit 'k8s-amd64-1' -b
 ```
 
-### Stability problems
+### Stability problems (currently included 400MHz)
+
+Change uboot to use ddr 333 MHz frequency.
+
+Compile uboot binaries or download from here: https://nextcloud.grigri.cloud/f/451602
 
 ```
-# binaries: https://github.com/rockchip-linux/rkbin/tree/b1bb741794d6af002182d365879c645a239f5118/bin/rk33
+git clone https://github.com/armbian/build.git
+cd build
+# edit `config/sources/families/include/rockchip64_common.inc` with this values for rock64:
+#      BOOT_USE_BLOBS=yes
+#      BOOT_SOC=rk3328
+#      DDR_BLOB='rk33/rk3328_ddr_333MHz_v1.16.bin'
+#      MINILOADER_BLOB='rk33/rk322xh_miniloader_v2.50.bin'
+#      BL31_BLOB='rk33/rk322xh_bl31_v1.44.elf'
 
-curl -L https://github.com/rockchip-linux/rkbin/raw/master/bin/rk33/rk3328_ddr_333MHz_v1.16.bin -o rk3328_ddr_333MHz_v1.16.bin
-mkimage -n rk3328 -T rksd -d rk3328_ddr_333MHz_v1.16.bin idbloader16.img
+./compile.sh docker
+# switch to expert (to see rock64) and compile u-boot for rock64
+docker cp $CONTAINER_ID:/root/armbian/cache/sources/u-boot/v2020.10/uboot.img .
+docker cp $CONTAINER_ID:/root/armbian/cache/sources/u-boot/v2020.10/idbloader.bin .
+docker cp $CONTAINER_ID:/root/armbian/cache/sources/u-boot/v2020.10/trust.bin .
 
-cat rk3328_miniloader_v2.46.bin >>idbloader16.img
+```
 
-dd if=idbloader16.img of=/dev/mmcblk0 seek=64 conv=notrunc
-
+Then, in rock64 SD card:
+```
+dd if=idbloader.bin of=/dev/mmcblk0 seek=64 conv=notrunc
+dd if=uboot.img of=/dev/mmcblk0 seek=16384 conv=notrunc
+dd if=trust.bin of=/dev/mmcblk0 seek=24576 conv=notrunc
 sync
-
 ```
 
 Ref:
