@@ -28,6 +28,13 @@ calico_node_cpu_limit: 600m
 # defaults. The value should be a number, not a string.
 calico_mtu: "{{ prepare_mtu }}"
 
+# Configure the MTU to use for workload interfaces and tunnels.
+# - If Wireguard is enabled, set to your network MTU - 60
+# - Otherwise, if VXLAN or BPF mode is enabled, set to your network MTU - 50
+# - Otherwise, if IPIP is enabled, set to your network MTU - 20
+# - Otherwise, if not using any encapsulation, set to your network MTU.
+#calico_veth_mtu: 1480
+
 # Advertise Cluster IPs
 # calico_advertise_cluster_ips: true
 
@@ -56,7 +63,7 @@ calico_mtu: "{{ prepare_mtu }}"
 
 # IP in IP and VXLAN is mutualy exclusive modes.
 # set IP in IP encapsulation mode: "Always", "CrossSubnet", "Never"
-calico_ipip_mode: 'CrossSubnet'
+#calico_ipip_mode: 'CrossSubnet'
 
 # set VXLAN encapsulation mode: "Always", "CrossSubnet", "Never"
 # calico_vxlan_mode: 'Never'
