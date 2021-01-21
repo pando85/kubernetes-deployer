@@ -3,7 +3,7 @@
   community.kubernetes.helm:
     chart_repo_url: https://repo.chartcenter.io
     chart_ref: bitnami/metallb
-    chart_version: v1.0.2
+    chart_version: v2.0.4
     name: metallb
     namespace: metallb-system
     create_namespace: yes
