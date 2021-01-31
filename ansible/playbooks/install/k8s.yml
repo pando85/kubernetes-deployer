@@ -13,3 +13,5 @@
 - import_playbook:  ../../playbooks/install/storage.yml
 
 - import_playbook:  ../../playbooks/install/load-balancer.yml
+
+- import_playbook:  ../../playbooks/install/monitoring/etcd-secrets.yml
