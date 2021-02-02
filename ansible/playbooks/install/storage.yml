@@ -3,6 +3,10 @@
   become: true
   roles:
     - storage/dependencies
+
+- hosts: all
+  become: true
+  roles:
     - smartd
 
 - hosts: kube-master[0]
